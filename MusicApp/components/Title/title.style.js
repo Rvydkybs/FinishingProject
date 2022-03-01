@@ -1,0 +1,59 @@
+import { StyleSheet } from "react-native";
+
+export default StyleSheet.create({
+    outContainer:{
+        backgroundColor:"#273a4f",
+        flex:1,
+    },
+    title:{
+        margin:10,
+        fontSize:30,
+        fontWeight:"bold",
+        padding:5,
+        color:"#FFA500",
+    },
+    container:{
+        flexDirection:"row",
+        marginTop:30,
+    },
+    innerContainer:{
+        marginLeft:130,
+    },
+    bottomContainer:{
+        flexDirection:"column",
+        justifyContent:"flex-start",
+        backgroundColor:"#4f647c",
+        borderWidth:2,
+        borderRadius:10,
+        borderColor:"#4f647c",
+        height:130,
+        marginLeft:10,
+        marginRight:10,
+
+    },
+    columnView:{
+        flexDirection:"column",
+        flex:1,
+    },
+    buttonContainer:{
+        padding:8,
+        borderRadius:15,
+        borderBottomLeftRadius:15,
+        borderBottomRightRadius:15,
+        margin:8,
+        height:100,
+    },
+    button:{
+        alignItems: "center",
+        borderWidth:3,
+        borderColor:"#6b7b8d",
+        borderRadius:10,
+        height:40,
+        backgroundColor:"#6b7b8d",
+    },
+    input:{
+        height:40,
+        fontSize:20,
+        padding:4,
+    }
+})
