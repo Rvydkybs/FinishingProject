@@ -3,13 +3,16 @@ import { View, Image } from "react-native";
 import styles from "./Login.style";
 import { Formik } from "formik";
 import { Alert } from "react-native";
-
+import AsyncStorageLib from "@react-native-async-storage/async-storage"; //kullanıcı kaydını bellekte tutmak için
 import usePost from "../../hooks/usePost/usePost";
+import { useDispatch } from "react-redux";
+
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 
 export default function Login({ navigation }) {
   const { data, loading, post, error } = usePost(); //hooks
+  const dispatch = useDispatch();
 
   function handleLogin(values) {
     post("https://fakestoreapi.com/auth" + "/login", values);
@@ -21,11 +24,11 @@ export default function Login({ navigation }) {
     if (data.status === "Error") {
       Alert.alert("Shop", "User not found");
     } else {
-      navigation.navigate("ProductsPage");
+      dispatch({ type: "SET_USER", payload: { user } });
+      navigation.navigate("Login", { screen: "ProductsPage" });
     }
-    console.log(data);
   }
-  console.log(data);
+
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -62,3 +65,20 @@ export default function Login({ navigation }) {
     </View>
   );
 }
+
+const user = {
+  address: {
+    geolocation: { lat: "-37.3159", long: "81.1496" },
+    city: "kilcoole",
+    street: "new road",
+    number: 7682,
+    zipcode: "12926-3874",
+  },
+  id: 1,
+  email: "john@gmail.com",
+  username: "johnd",
+  password: "m38rmF$",
+  name: { firstname: "john", lastname: "doe" },
+  phone: "1-570-236-7033",
+  __v: 0,
+};
