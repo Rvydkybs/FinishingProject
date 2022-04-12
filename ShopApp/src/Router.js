@@ -6,15 +6,49 @@ import Detail from "./Pages/Detail/Detail";
 import Login from "./Pages/Login/Login";
 import { useSelector } from "react-redux";
 import Loading from "./Components/Loading/Loading";
+import Profile from "./Pages/Profile/Profile";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function Router() {
   const userSession = useSelector((s) => s.user);
   const isLoading = useSelector((s) => s.isAuthLoading);
 
+  const Detail = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="DetailPage"
+          component={Detail}
+          options={{
+            title: "Home",
+            headerStyle: { backgroundColor: "#90caf9" },
+            headerTitleStyle: { color: "white" },
+          }}
+        />
+      </Stack.Navigator>
+    );
+  };
+  const TopBar = () => {
+    return (
+      <Tab.Navigator>
+        <Tab.Screen
+          name="ProductsPage"
+          component={Products}
+          options={{
+            title: "Home",
+            headerStyle: { backgroundColor: "#90caf9" },
+            headerTitleStyle: { color: "white" },
+          }}
+        ></Tab.Screen>
+        <Tab.Screen name="Profile" component={Profile} />
+      </Tab.Navigator>
+    );
+  };
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       {isLoading ? (
         <Loading />
       ) : !userSession ? (
@@ -30,22 +64,17 @@ export default function Router() {
       ) : (
         <Stack.Navigator>
           <Stack.Screen
-            name="ProductsPage"
-            component={Products}
+            name="topBar"
+            component={TopBar}
             options={{
-              title: "Store",
-              headerStyle: { backgroundColor: "#90caf9" },
-              headerTitleStyle: { color: "white" },
+              headerShown: false,
             }}
           ></Stack.Screen>
           <Stack.Screen
-            name="DetailPage"
+            name="detail"
             component={Detail}
             options={{
-              title: "Detail",
-              headerStyle: { backgroundColor: "#90caf9" },
-              headerTitleStyle: { color: "white" },
-              headerTintColor: "white",
+              headerShown: false,
             }}
           ></Stack.Screen>
         </Stack.Navigator>

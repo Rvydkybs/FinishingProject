@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
 export default function Reducers(state, action) {
   switch (action.type) {
     case "SET_USER":

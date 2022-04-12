@@ -3,7 +3,6 @@ import { View, Image } from "react-native";
 import styles from "./Login.style";
 import { Formik } from "formik";
 import { Alert } from "react-native";
-import AsyncStorageLib from "@react-native-async-storage/async-storage"; //kullanıcı kaydını bellekte tutmak için
 import usePost from "../../hooks/usePost/usePost";
 import { useDispatch } from "react-redux";
 
@@ -25,7 +24,7 @@ export default function Login({ navigation }) {
       Alert.alert("Shop", "User not found");
     } else {
       dispatch({ type: "SET_USER", payload: { user } });
-      navigation.navigate("Login", { screen: "ProductsPage" });
+      navigation.navigate("ProductsPage");
     }
   }
 
