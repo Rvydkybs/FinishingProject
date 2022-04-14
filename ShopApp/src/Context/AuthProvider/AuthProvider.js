@@ -20,10 +20,6 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const store = createStore(Reducers, { user, isAuthLoading });
-  const data = user;
-  return (
-    <Provider store={store} data={data}>
-      {children}
-    </Provider>
-  );
+
+  return <Provider store={store}>{children}</Provider>;
 }

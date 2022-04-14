@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text } from "react-native";
 import { useDispatch, createStore, useSelector } from "react-redux";
 
-export default function Profile(data) {
-  console.log(data);
+export default function Profile({ user }) {
+  //const userInformation = useSelector((s) => s.user);
+  console.log(user);
 
-  return <View>{data && <Text>{data.username}</Text>}</View>;
+  return <View>{user && <Text>{user.username}</Text>}</View>;
 }
