@@ -65,7 +65,7 @@ export default function Router() {
           component={Add}
           options={{
             tabBarIcon: () => (
-              <MaterialIcons name="add-a-photo" size={24} color="black" /> //aq görünmüyo
+              <MaterialIcons name="add-a-photo" size={24} color="black" /> // görünmüyo
             ),
           }}
         ></Tab.Screen>
