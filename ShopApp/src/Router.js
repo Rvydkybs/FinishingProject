@@ -3,7 +3,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
@@ -58,18 +60,28 @@ export default function Router() {
             title: "Home",
             headerStyle: { backgroundColor: "#90caf9" },
             headerTitleStyle: { color: "white" },
+            tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
           }}
         ></Tab.Screen>
         <Tab.Screen
           name="Add"
           component={Add}
           options={{
+            headerShown: null,
             tabBarIcon: () => (
-              <MaterialIcons name="add-a-photo" size={24} color="black" /> // görünmüyo
+              <AntDesign name="pluscircle" size={24} color="black" /> // görünmüyo
             ),
           }}
         ></Tab.Screen>
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons name="account" size={24} color="black" />
+            ),
+          }}
+        />
       </Tab.Navigator>
     );
   };

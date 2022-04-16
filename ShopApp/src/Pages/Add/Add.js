@@ -6,8 +6,6 @@ import { EvilIcons } from "@expo/vector-icons";
 
 import Image from "./Image";
 import styles from "./Add.style";
-import { Alert } from "react-native";
-import useFetch from "../../hooks/useFetch/useFetch";
 
 //image benim componentim tag değil!!!!!!!
 export default function Add({ navigation, data, setData }) {
@@ -16,18 +14,20 @@ export default function Add({ navigation, data, setData }) {
   const [price, SetPrice] = useState("");
 
   const newData = {
-    image: image,
-    title: title,
-    price: price,
+    image,
+    title,
+    price,
   };
   const addProduct = () => {
-    setData({ ...data, newData }); //bulmuyorrr!!!!
+    //setData({ ...data, newData }); //bulmuyorrr!!!!
     navigation.navigate("ProductsPage");
+    console.log(title);
+    return { ...data, newData }; //setdata yerine yazdım ama ekleme yapmıyorr
   };
 
   return (
     <View style={styles.container}>
-      <Text>Add a product!</Text>
+      <Text style={{ fontSize: 25 }}>Add a Product!</Text>
       <View style={styles.image}>
         <Image style={styles.image}></Image>
         <EvilIcons name="image" size={85} color="black" />
@@ -55,7 +55,11 @@ export default function Add({ navigation, data, setData }) {
         <MaterialIcons name="description" size={20} color="#000" />
       </View>
       <View>
-        <Button onPress={addProduct} title="Add Product" />
+        <Button
+          onPress={addProduct}
+          title="Add Product"
+          style={styles.button}
+        />
       </View>
     </View>
   );

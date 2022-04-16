@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     padding: 10,
+    marginTop: 50,
   },
   image: {
     backgroundColor: "#DCDCDC",
@@ -53,5 +54,9 @@ export default StyleSheet.create({
     padding: 10,
     margin: 10,
     fontSize: 20,
+  },
+  button: {
+    margin: 5,
+    borderRadius: 8,
   },
 });

@@ -8,7 +8,6 @@ export default () => {
   return (
     <AuthProvider>
       <Router />
-      <Profile />
     </AuthProvider>
   );
 };
