@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Detail from "../Detail/Detail";
+import Add from "../Add/Add";
 
 const Stack = createStackNavigator();
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Add from "../../Pages/Add/Add";
 
 export default function useFetch(url) {
   const [data, setData] = useState([]);
@@ -17,6 +18,7 @@ export default function useFetch(url) {
   };
 
   useEffect(() => {
+    <Add data={data} setData={setData} />;
     fetchData();
   }, []);
   return { error, loading, data };
