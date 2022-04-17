@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#90caf9",
+    backgroundColor: "#FFCCFF",
   },
   logo: {
     height: Dimensions.get("window").height / 3,

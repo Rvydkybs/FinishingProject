@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
@@ -22,7 +22,7 @@ export default function Router() {
 
   const p = () => {
     //böyle olmaz beybi!!!!!!!!!!!!!!!!!!!!!!!!!!
-    userSession && <Profile user={userSession}></Profile>;
+    userSession && <Profile user={userSession}></Profile>; //kullanıcı bilgileri alamaya çalışan gariban
   };
   p();
   const Detail = () => {
@@ -58,7 +58,8 @@ export default function Router() {
           component={Products}
           options={{
             title: "Home",
-            headerStyle: { backgroundColor: "#90caf9" },
+            tabBarActiveTintColor: "#990066",
+            headerStyle: { backgroundColor: "#990066" },
             headerTitleStyle: { color: "white" },
             tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
           }}
@@ -67,6 +68,7 @@ export default function Router() {
           name="Add"
           component={Add}
           options={{
+            tabBarActiveTintColor: "#990066",
             headerShown: null,
             tabBarIcon: () => (
               <AntDesign name="pluscircle" size={24} color="black" /> // görünmüyo
@@ -77,8 +79,9 @@ export default function Router() {
           name="Profile"
           component={Profile}
           options={{
+            tabBarActiveTintColor: "#990066",
             tabBarIcon: () => (
-              <MaterialCommunityIcons name="account" size={24} color="black" />
+              <Image source={require("../src/assets/account.png")} /> //resim de çalışmıyo icon da
             ),
           }}
         />

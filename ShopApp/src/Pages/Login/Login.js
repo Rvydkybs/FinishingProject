@@ -6,6 +6,7 @@ import { Alert } from "react-native";
 import usePost from "../../hooks/usePost/usePost";
 import { useDispatch } from "react-redux";
 
+import Error from "../../Components/Error/Error";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 
@@ -17,11 +18,12 @@ export default function Login({ navigation }) {
     post("https://fakestoreapi.com/auth" + "/login", values);
   }
   if (error) {
-    Alert.alert("Shop", "Something went wrong");
+    Alert.alert("Uups!", "Something went wrong");
+    return <Error />; //gelmiyo?
   }
   if (data) {
     if (data.status === "Error") {
-      Alert.alert("Shop", "User not found");
+      Alert.alert("Uups!", "User not found");
     } else {
       dispatch({ type: "SET_USER", payload: { user } });
       navigation.navigate("ProductsPage");

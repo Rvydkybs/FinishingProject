@@ -10,6 +10,7 @@ export default function Profile({ user }) {
   return (
     <View>
       <Button
+        color="#990066"
         style={style.button}
         title="Log Out"
         onPress={() => dispatch({ type: "SET_USER", payload: { user: null } })}
