@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-
+import auth from "@react-native-firebase/auth";
 import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
 import Loading from "./Components/Loading/Loading";
