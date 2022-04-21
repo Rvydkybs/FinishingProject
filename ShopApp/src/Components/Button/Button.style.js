@@ -6,7 +6,8 @@ export default StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     alignItems: "center",
-    backgroundColor: "#2286c0",
+    backgroundColor: "#990066",
+    height: 35,
   },
   title: {
     padding: 3,

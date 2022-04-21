@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 export default StyleSheet.create({
   container: {
@@ -9,7 +9,7 @@ export default StyleSheet.create({
     flexDirection: "row",
   },
   image: {
-    width: 100,
+    width: Dimensions.get("window").width / 3,
     minHeight: 100,
     resizeMode: "contain", //bulunduğu alan içine resmi düzgün sığdırır
     backgroundColor: "white",
@@ -24,6 +24,7 @@ export default StyleSheet.create({
     fontSize: 18,
   },
   price: {
+    color: "#336600",
     textAlign: "right",
     fontSize: 15,
     fontStyle: "italic",
