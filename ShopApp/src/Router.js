@@ -13,6 +13,7 @@ import Loading from "./Components/Loading/Loading";
 import Profile from "./Pages/Profile/Profile";
 import Add from "./Pages/Add/Add";
 import AddImage from "./Pages/Add/AddImage";
+import Detail from "./Pages/Detail/Detail";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,21 +27,21 @@ export default function Router() {
     userSession && <Profile user={userSession}></Profile>; //kullanıcı bilgileri alamaya çalışan gariban
   };
   p();
-  const Stacks = () => {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen
-          name="DetailPage"
-          component={Detail}
-          options={{
-            title: "Home",
-            headerStyle: { backgroundColor: "#90caf9" },
-            headerTitleStyle: { color: "white" },
-          }}
-        />
-      </Stack.Navigator>
-    );
-  };
+  // const Stacks = () => {
+  //   return (
+  //     <Stack.Navigator>
+  //       <Stack.Screen
+  //         name="DetailPage"
+  //         component={Detail}
+  //         options={{
+  //           title: "Home",
+  //           headerStyle: { backgroundColor: "#90caf9" },
+  //           headerTitleStyle: { color: "white" },
+  //         }}
+  //       />
+  //     </Stack.Navigator>
+  //   );
+  // };
   const TopBar = () => {
     return (
       <Tab.Navigator
@@ -117,8 +118,8 @@ export default function Router() {
             }}
           ></Stack.Screen>
           <Stack.Screen
-            name="detail"
-            component={Stacks}
+            name="Detail"
+            component={Detail}
             options={{
               headerShown: false,
             }}

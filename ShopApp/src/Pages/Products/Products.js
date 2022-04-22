@@ -17,7 +17,7 @@ export default function Products({ navigation }) {
     "https://fakestoreapi.com/products/"
   );
   const handleProductSelect = (id) => {
-    navigation.navigate("detail", { id }); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    navigation.navigate("Detail", { id }); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   };
 
   const renderProduct = ({ item }) => (

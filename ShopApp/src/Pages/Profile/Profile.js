@@ -9,6 +9,9 @@ export default function Profile({ user }) {
 
   return (
     <View>
+      <View>
+        <Text></Text>
+      </View>
       <Button
         color="#990066"
         style={style.button}
