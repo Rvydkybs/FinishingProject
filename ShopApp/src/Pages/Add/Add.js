@@ -1,36 +1,46 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, Button } from "react-native";
+import { Text, View, TextInput, Button, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import { Alert } from "react-native";
 
-import Image from "./Image";
 import styles from "./Add.style";
+import AddImage from "./AddImage";
 
-//image benim componentim tag değil!!!!!!!
+const Stack = createStackNavigator();
+
 export default function Add({ navigation, data, setData }) {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState(null);
   const [image, SetImage] = useState(null);
-  const [price, SetPrice] = useState("");
+  const [price, SetPrice] = useState(null);
 
   const newData = {
     image,
     title,
     price,
   };
+
   const addProduct = () => {
     //setData({ ...data, newData }); //bulmuyorrr!!!!
-    navigation.navigate("ProductsPage");
-    console.log(title);
-    return { ...data, newData }; //setdata yerine yazdım ama ekleme yapmıyorr
+    if (image || title || price === null) {
+      Alert.alert("Warning", "Please fill in the blanks!");
+    } else {
+      navigation.navigate("ProductsPage");
+      console.log(title);
+      return { ...data, newData }; //setdata yerine yazdım ama ekleme yapmıyorr
+    }
   };
 
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 25 }}>Add a Product!</Text>
       <View style={styles.image}>
-        <Image style={styles.image}></Image>
-        <EvilIcons name="image" size={85} color="black" />
+        <TouchableOpacity onPress={() => navigation.navigate("AddImage")}>
+          <EvilIcons name="image" size={85} color="black" />
+        </TouchableOpacity>
       </View>
       <View style={styles.title}>
         <TextInput

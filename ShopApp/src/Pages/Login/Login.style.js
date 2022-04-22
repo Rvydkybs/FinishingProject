@@ -46,6 +46,6 @@ export default StyleSheet.create({
   buttonOutText: {
     color: "blue",
     fontWeight: "700",
-    fontSize: "16",
+    fontSize: 16,
   },
 });

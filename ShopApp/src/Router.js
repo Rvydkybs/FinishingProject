@@ -4,14 +4,15 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import auth from "@react-native-firebase/auth";
+
 import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
 import Loading from "./Components/Loading/Loading";
 import Profile from "./Pages/Profile/Profile";
 import Add from "./Pages/Add/Add";
+import AddImage from "./Pages/Add/AddImage";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,7 +26,7 @@ export default function Router() {
     userSession && <Profile user={userSession}></Profile>; //kullanıcı bilgileri alamaya çalışan gariban
   };
   p();
-  const Detail = () => {
+  const Stacks = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen
@@ -71,7 +72,11 @@ export default function Router() {
             tabBarActiveTintColor: "#990066",
             headerShown: null,
             tabBarIcon: () => (
-              <AntDesign name="pluscircle" size={24} color="black" /> // görünmüyo
+              <MaterialCommunityIcons
+                name="plus-circle"
+                color={"black"}
+                size={24}
+              /> // görünmüyo
             ),
           }}
         ></Tab.Screen>
@@ -113,11 +118,16 @@ export default function Router() {
           ></Stack.Screen>
           <Stack.Screen
             name="detail"
-            component={Detail}
+            component={Stacks}
             options={{
               headerShown: false,
             }}
           ></Stack.Screen>
+          <Stack.Screen
+            options={{ headerShown: false }}
+            name="AddImage"
+            component={AddImage}
+          />
         </Stack.Navigator>
       )}
     </NavigationContainer>
