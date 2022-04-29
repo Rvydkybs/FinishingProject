@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Image } from "react-native";
 import styles from "./Login.style";
 import { Formik } from "formik";
@@ -11,9 +11,10 @@ import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 
 export default function Login({ navigation }) {
+  const [myUser, setMyUser] = useState("");
+  const [myPassword, setMyPassword] = useState("");
   const { data, loading, post, error } = usePost(); //hooks
   const dispatch = useDispatch();
-
   function handleLogin(values) {
     post("https://fakestoreapi.com/auth" + "/login", values);
   }
@@ -26,7 +27,7 @@ export default function Login({ navigation }) {
       Alert.alert("Uups!", "User not found");
     } else {
       dispatch({ type: "SET_USER", payload: { user } });
-      navigation.navigate("ProductsPage");
+      navigation.navigate("TopBar", { screen: "ProductsPage" });
     }
   }
 

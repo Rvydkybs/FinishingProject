@@ -3,14 +3,14 @@ import { StyleSheet, Dimensions } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFCCFF",
+    backgroundColor: "#f8edff",
   },
   logo: {
-    height: Dimensions.get("window").height / 3,
+    height: Dimensions.get("window").height / 2.4,
     width: Dimensions.get("window").width,
     resizeMode: "contain",
     alignSelf: "center",
-    tintColor: "white",
+    tintColor: "#990066",
   },
   body: {
     margin: 5,

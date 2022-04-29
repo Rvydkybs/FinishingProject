@@ -27,15 +27,22 @@ export default function Products({ navigation }) {
     ></ProductCard>
   );
 
-  if (loading) {
-    return <Loading />;
-  }
-  if (error) {
-    return <Error />;
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
+  // if (error) {
+  //   return <Error />;
+  // }
   return (
     <View>
-      <FlatList data={data} renderItem={renderProduct}></FlatList>
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <Error />
+      ) : (
+        <FlatList data={data} renderItem={renderProduct}></FlatList>
+      )}
+      {/* <FlatList data={data} renderItem={renderProduct}></FlatList> */}
     </View>
   );
 }

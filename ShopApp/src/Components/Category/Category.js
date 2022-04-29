@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableWithoutFeedback,
-  useWindowDimensions,
-} from "react-native";
+import { StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { TabView, SceneMap } from "react-native-pager-view";
-import styles from "./ProductCard.style";
 
 const Route = ({ title }) => {
   const [product, setPro] = useState();
@@ -23,11 +16,21 @@ const Route = ({ title }) => {
     </View>
   );
 };
+
+// const SecondRoute = ({ title }) => (
+//   <View style={{ flex: 1, backgroundColor: "#673ab7" }}>
+//     <Text>{title}</Text>
+//   </View>
+// );
+
+// const renderScene = SceneMap({
+//   first: FirstRoute,
+//   second: SecondRoute,
+// });
 const renderScene = ({ route }) => {
   return <Route title={route.title} />;
 };
-
-export default function ProductCard({ product, onSelect }) {
+export default function Category() {
   const layout = useWindowDimensions();
 
   const [index, setIndex] = React.useState(0);
@@ -45,26 +48,22 @@ export default function ProductCard({ product, onSelect }) {
   useEffect(() => {
     getProducts();
   }, []);
-  return (
-    <View>
-      <TouchableWithoutFeedback onPress={onSelect}>
-        {routes ? ( //hata veren yer
-          <TabView
-            navigationState={{ index, routes }}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={{ width: layout.width }}
-          />
-        ) : null}
 
-        <View style={styles.container}>
-          <Image style={styles.image} source={{ uri: product.image }} />
-          <View style={styles.body_container}>
-            <Text style={styles.title}>{product.title}</Text>
-            <Text style={styles.price}>{product.price} TL</Text>
-          </View>
-        </View>
-      </TouchableWithoutFeedback>
-    </View>
-  );
+  return routes ? (
+    <TabView
+      navigationState={{ index, routes }}
+      renderScene={renderScene}
+      onIndexChange={setIndex}
+      initialLayout={{ width: layout.width }}
+    />
+  ) : null;
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
