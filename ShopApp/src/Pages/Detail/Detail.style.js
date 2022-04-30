@@ -34,14 +34,14 @@ export default StyleSheet.create({
   input: {
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: "#990066",
+    borderColor: "#00695C",
     padding: 5,
     margin: 10,
     marginTop: 20,
     height: 45,
   },
   opcity: {
-    backgroundColor: "#990066",
+    backgroundColor: "#00695C",
     height: 45,
     borderRadius: 10,
     padding: 5,

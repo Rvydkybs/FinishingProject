@@ -15,5 +15,6 @@ export default StyleSheet.create({
     padding: 5,
     borderRadius: 6,
     flex: 1,
+    color: "#535457",
   },
 });

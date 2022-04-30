@@ -13,8 +13,7 @@ export default function usePost() {
       setData(responseData);
       setLoading(false);
     } catch (error) {
-      setError(true); //saçma oldu
-      setError(false);
+      setError(true);
     }
   };
   return { data, loading, error, post };

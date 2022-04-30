@@ -5,6 +5,7 @@ export default StyleSheet.create({
     marginTop: 30,
     flex: 1,
     justifyContent: "flex-start",
+    backgroundColor: "#E0F2F1",
   },
   title: { fontSize: 25, margin: 5, padding: 5 },
   innerContainer: {
@@ -16,7 +17,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     width: 190,
     height: 150,
-    borderColor: "#990066",
+    borderColor: "#00695C",
     borderWidth: 3,
     resizeMode: "contain",
     alignItems: "center",

@@ -66,7 +66,7 @@ export default function Add({ navigation, data, setData }) {
       </View>
       <View>
         <Button
-          color="#990066"
+          color="#00695C"
           onPress={addProduct}
           title="Add Product"
           style={styles.button}

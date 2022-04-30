@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
+import { TabView, SceneMap } from "react-native-pager-view";
 
 import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
@@ -55,8 +55,8 @@ export default function Router() {
           component={Products}
           options={{
             title: "Home",
-            tabBarActiveTintColor: "#990066",
-            headerStyle: { backgroundColor: "#990066" },
+            tabBarActiveTintColor: "#00695C",
+            headerStyle: { backgroundColor: "#00695C" },
             headerTitleStyle: { color: "white" },
             tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
           }}
@@ -65,7 +65,7 @@ export default function Router() {
           name="Add"
           component={Add}
           options={{
-            tabBarActiveTintColor: "#990066",
+            tabBarActiveTintColor: "#00695C",
             headerShown: null,
             tabBarIcon: () => (
               <MaterialCommunityIcons
@@ -80,7 +80,8 @@ export default function Router() {
           name="Profile"
           component={Profile}
           options={{
-            tabBarActiveTintColor: "#990066",
+            headerShown: null,
+            tabBarActiveTintColor: "#00695C",
             tabBarIcon: () => (
               <MaterialCommunityIcons name="account" size={24} color="black" />
             ),

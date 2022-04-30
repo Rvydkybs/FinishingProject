@@ -11,8 +11,6 @@ import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 
 export default function Login({ navigation }) {
-  const [myUser, setMyUser] = useState("");
-  const [myPassword, setMyPassword] = useState("");
   const { data, loading, post, error } = usePost(); //hooks
   const dispatch = useDispatch();
   function handleLogin(values) {

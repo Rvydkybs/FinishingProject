@@ -1,10 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useDispatch } from "react-redux";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function Profile({ user }) {
+import styles from "./Profile.style";
+import LogOut from "../../Components/LogOut/LogOut";
+
+export default function Profile({ navigation }) {
   const [data, setData] = useState({});
+  const [lootie, setLootie] = useState(false);
   const dispatch = useDispatch();
   const fetchData = async () => {
     //fonskiyon içinde kullanmayınca haxios hata verdi?
@@ -18,24 +23,43 @@ export default function Profile({ user }) {
       setError(error.message);
     }
   };
+
   useEffect(() => {
     fetchData();
   }, []);
   console.log("user: ", data);
   return (
-    <View>
-      <View>
-        <Text>{data.username}</Text>
+    <View style={styles.outcontainer}>
+      <View style={styles.container}>
+        <Text style={{ fontSize: 24 }}>Your Profile</Text>
+        <View style={{ marginTop: 20 }}>
+          <Text style={styles.outline}>Name:</Text>
+          <View style={styles.text}>
+            <Text style={styles.line}> {data.username}</Text>
+          </View>
+          <Text style={styles.outline}>E-mail:</Text>
+          <View style={styles.text}>
+            <Text style={styles.line}> {data.email}</Text>
+          </View>
+          <Text style={styles.outline}>Phone Number:</Text>
+          <View style={styles.text}>
+            <Text style={styles.line}> {data.phone}</Text>
+          </View>
+        </View>
       </View>
-      <View>
-        <Button
-          color="#990066"
-          style={style.button}
-          title="Log Out"
-          onPress={() =>
-            dispatch({ type: "SET_USER", payload: { user: null } })
-          }
-        ></Button>
+      <View style={styles.button}>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch({ type: "SET_USER", payload: { user: null } });
+            setLootie(true);
+            if (lootie) {
+              <LogOut />; //çıkış yaparken lootie gelsin
+              setLootie(false);
+            }
+          }}
+        >
+          <Text style={styles.tco}>Log Out</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
