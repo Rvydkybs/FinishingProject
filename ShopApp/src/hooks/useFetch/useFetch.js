@@ -18,7 +18,6 @@ export default function useFetch(url) {
   };
 
   useEffect(() => {
-    <Add data={data} setData={setData} />;
     fetchData();
   }, []);
   return { error, loading, data };

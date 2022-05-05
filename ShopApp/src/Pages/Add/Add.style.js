@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     padding: 10,
-    marginTop: 50,
+    marginTop: 20,
+    backgroundColor: "white",
   },
   image: {
-    backgroundColor: "#DCDCDC",
+    backgroundColor: "white",
     borderRadius: 8,
-    width: 100,
-    height: 100,
+    width: 170,
+    height: 140,
     padding: 10,
     margin: 10,
     fontSize: 20,

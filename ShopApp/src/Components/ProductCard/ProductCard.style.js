@@ -7,12 +7,14 @@ export default StyleSheet.create({
     borderWidth: 1,
     margin: 10,
     flexDirection: "row",
+    borderRadius: 10,
   },
   image: {
     width: Dimensions.get("window").width / 3,
     minHeight: 100,
     resizeMode: "contain", //bulunduğu alan içine resmi düzgün sığdırır
     backgroundColor: "white",
+    borderRadius: 10,
   },
   body_container: {
     flex: 1,

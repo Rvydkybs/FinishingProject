@@ -4,7 +4,6 @@ import Error from "../../Components/Error/Error";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 import useFetch from "../../hooks/useFetch/useFetch";
 import { useDispatch } from "react-redux";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -17,7 +16,7 @@ export default function Products({ navigation }) {
     "https://fakestoreapi.com/products/"
   );
   const handleProductSelect = (id) => {
-    navigation.navigate("Detail", { id }); //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    navigation.navigate("Detail", { id });
   };
 
   const renderProduct = ({ item }) => (
@@ -27,12 +26,6 @@ export default function Products({ navigation }) {
     ></ProductCard>
   );
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
-  // if (error) {
-  //   return <Error />;
-  // }
   return (
     <View>
       {loading ? (

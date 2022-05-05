@@ -5,16 +5,13 @@ import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-import { TabView, SceneMap } from "react-native-pager-view";
 
 import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
 import Loading from "./Components/Loading/Loading";
 import Profile from "./Pages/Profile/Profile";
 import Add from "./Pages/Add/Add";
-import AddImage from "./Pages/Add/AddImage";
 import Detail from "./Pages/Detail/Detail";
-import Category from "./Components/Category/Category";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,21 +20,6 @@ export default function Router() {
   const userSession = useSelector((s) => s.user);
   const isLoading = useSelector((s) => s.isAuthLoading);
 
-  // const Stacks = () => {
-  //   return (
-  //     <Stack.Navigator>
-  //       <Stack.Screen
-  //         name="DetailPage"
-  //         component={Detail}
-  //         options={{
-  //           title: "Home",
-  //           headerStyle: { backgroundColor: "#90caf9" },
-  //           headerTitleStyle: { color: "white" },
-  //         }}
-  //       />
-  //     </Stack.Navigator>
-  //   );
-  // };
   const TopBar = () => {
     return (
       <Tab.Navigator
@@ -120,11 +102,6 @@ export default function Router() {
               headerShown: false,
             }}
           ></Stack.Screen>
-          <Stack.Screen
-            options={{ headerShown: false }}
-            name="AddImage"
-            component={AddImage}
-          />
         </Stack.Navigator>
       )}
     </NavigationContainer>

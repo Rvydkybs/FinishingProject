@@ -12,7 +12,6 @@ export default function Profile({ navigation }) {
   const [lootie, setLootie] = useState(false);
   const dispatch = useDispatch();
   const fetchData = async () => {
-    //fonskiyon içinde kullanmayınca haxios hata verdi?
     try {
       const { data: responseData } = await axios.get(
         "https://fakestoreapi.com/users/1"
@@ -20,14 +19,14 @@ export default function Profile({ navigation }) {
       setData(responseData);
       setLoading(false);
     } catch (error) {
-      setError(error.message);
+      return null;
     }
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-  console.log("user: ", data);
+  //console.log("user: ", data);
   return (
     <View style={styles.outcontainer}>
       <View style={styles.container}>
@@ -51,11 +50,6 @@ export default function Profile({ navigation }) {
         <TouchableOpacity
           onPress={() => {
             dispatch({ type: "SET_USER", payload: { user: null } });
-            setLootie(true);
-            if (lootie) {
-              <LogOut />; //çıkış yaparken lootie gelsin
-              setLootie(false);
-            }
           }}
         >
           <Text style={styles.tco}>Log Out</Text>
