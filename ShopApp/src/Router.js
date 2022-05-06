@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+// import { createDrawerNavigator } from "@react-navigation/drawer";
+// import 'react-native-gesture-handler';
 
 import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
@@ -12,9 +14,11 @@ import Loading from "./Components/Loading/Loading";
 import Profile from "./Pages/Profile/Profile";
 import Add from "./Pages/Add/Add";
 import Detail from "./Pages/Detail/Detail";
+import TempPage from "./Pages/TempPage/TempPage";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+// const Drawer = createDrawerNavigator();
 
 export default function Router() {
   const userSession = useSelector((s) => s.user);
@@ -33,8 +37,8 @@ export default function Router() {
         }}
       >
         <Tab.Screen
-          name="ProductsPage"
-          component={Products}
+          name="TempPage"
+          component={TempPage}
           options={{
             title: "Home",
             tabBarActiveTintColor: "#00695C",
@@ -72,6 +76,9 @@ export default function Router() {
       </Tab.Navigator>
     );
   };
+  // const drawer = () => {
+  //   return <Drawer.Screen name="messages" component={TempPage}></Drawer.Screen>;
+  // };
   return (
     <NavigationContainer independent={true}>
       {isLoading ? (
@@ -102,6 +109,13 @@ export default function Router() {
               headerShown: false,
             }}
           ></Stack.Screen>
+          {/* <Stack.Screen
+            name="drawer"
+            component={drawer}
+            options={{
+              headerShown: false,
+            }}
+          /> */}
         </Stack.Navigator>
       )}
     </NavigationContainer>

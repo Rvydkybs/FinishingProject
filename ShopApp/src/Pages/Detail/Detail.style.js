@@ -4,7 +4,7 @@ const deviceSize = Dimensions.get("window");
 export default StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 30,
   },
   image: {
     width: deviceSize.width,
