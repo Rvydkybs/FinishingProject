@@ -7,8 +7,7 @@ export default function Register({ navigation }) {
   const [email, setEmail] = useState("");
 
   const handleRegister = (email) => {
-    let reg =
-      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let reg = /\S+@\S+\.\S+/;
 
     if (email.length == 0) {
       Alert.alert("Warning", "email address must be enter");
@@ -17,7 +16,7 @@ export default function Register({ navigation }) {
       Alert.alert("Warning", "email address is not valid");
       setEmail("");
     } else if (reg.test(email) == true) {
-      navigation.navigaet("TempPage");
+      navigation.navigate("TempPage");
       setEmail("");
     }
   };

@@ -6,9 +6,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
-import firebase from "firebase/compat/app";
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
 
 import Login from "./Pages/Login/Login";
 import Loading from "./Components/Loading/Loading";
@@ -16,44 +13,18 @@ import Profile from "./Pages/Profile/Profile";
 import Add from "./Pages/Add/Add";
 import Detail from "./Pages/Detail/Detail";
 import TempPage from "./Pages/TempPage/TempPage";
-import Message from "./Pages/Message";
+import Message from "./Pages/Message/Message";
 import Register from "./Components/Register/Register";
-import Loginscreen from "./Pages/Login/LoginScreen";
-import SignUpScreen from "./Pages/Login/SignUp";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function Router() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const userSession = useSelector((s) => s.user);
   const isLoading = useSelector((s) => s.isAuthLoading);
+
   const dispatch = useDispatch();
 
-  const firebaseConfig = {
-    //firebase
-    apiKey: "AIzaSyDC2D7nYV_aP1JmWK5oRl-XBKExTMjeqQY",
-    authDomain: "shopapppatika.firebaseapp.com",
-    projectId: "shopapppatika",
-    storageBucket: "shopapppatika.appspot.com",
-    messagingSenderId: "976991780324",
-    appId: "1:976991780324:web:717669023737f43e655bf1",
-  };
-  firebase.initializeApp(firebaseConfig);
-
-  //Checking if firebase has been initialized
-  if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-  } else {
-    firebase.app();
-  }
-  firebase.onAuthStateChanged(auth, (user) => {
-    if (user != null) {
-      console.log("We are authenticated now!");
-    }
-
-    // Do other things
-  });
   const TopBar = () => {
     return (
       <Tab.Navigator
@@ -92,27 +63,33 @@ export default function Router() {
             ),
           }}
         ></Tab.Screen>
-        <Tab.Screen
-          name="Profile"
-          component={Profile}
-          options={{
-            headerRight: () => (
-              <MaterialCommunityIcons
-                name="logout"
-                size={24}
-                color={"wihte"}
-                onPress={() => {
-                  dispatch({ type: "SET_USER", payload: { user: null } });
-                }}
-              />
-            ),
-            headerStyle: { backgroundColor: "#00695C" },
-            tabBarActiveTintColor: "#00695C",
-            tabBarIcon: () => (
-              <MaterialCommunityIcons name="account" size={24} color="black" />
-            ),
-          }}
-        />
+        {userSession ? (
+          <Tab.Screen
+            name="Profile"
+            component={Profile}
+            options={{
+              headerRight: () => (
+                <MaterialCommunityIcons
+                  name="logout"
+                  size={24}
+                  color={"white"}
+                  onPress={() => {
+                    dispatch({ type: "SET_USER", payload: { user: null } });
+                  }}
+                />
+              ),
+              headerStyle: { backgroundColor: "#00695C" },
+              tabBarActiveTintColor: "#00695C",
+              tabBarIcon: () => (
+                <MaterialCommunityIcons
+                  name="account"
+                  size={24}
+                  color="black"
+                />
+              ),
+            }}
+          />
+        ) : null}
       </Tab.Navigator>
     );
   };
@@ -121,18 +98,18 @@ export default function Router() {
     <NavigationContainer independent={true}>
       {isLoading ? (
         <Loading />
-      ) : !isLoggedIn ? (
+      ) : !userSession ? (
         <Stack.Navigator>
           <Stack.Screen
             name="LoginPage"
-            component={Loginscreen}
+            component={Login}
             options={{
               headerShown: false,
             }}
           ></Stack.Screen>
           <Stack.Screen
             name="Register"
-            component={SignUpScreen}
+            component={Register}
             options={{
               headerShown: false,
             }}

@@ -6,22 +6,22 @@ import styles from "./Detail.style";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import { Alert } from "react-native";
-
-import Message from "../Message";
+import Message from "../Message/Message";
 
 export default function Detail({ route }) {
   const [message, setMessage] = useState("");
-  const [value, setValue] = useState("");
 
   const { id } = route.params;
   const { loading, error, data } = useFetch(
     "https://fakestoreapi.com/products/" + "/" + id
   );
   const handleSend = () => {
-    <Message message={message} />;
-    console.log("detail page-send message to seller part:", message);
+    if (message === "") {
+      return Alert.alert("Wrong", "Please enter a message!");
+    }
     setMessage("");
     Alert.alert("Success", "Your message is send to the seller!");
+    return <Message data={message} />;
   };
   if (loading) {
     return <Loading />;
@@ -42,8 +42,8 @@ export default function Detail({ route }) {
         <TextInput
           value={message}
           placeholder="Send a message to the seller..."
-          onChangeText={(str) => {
-            setMessage(str);
+          onChange={(str) => {
+            setMessage(str.target.value);
           }}
         />
       </View>
