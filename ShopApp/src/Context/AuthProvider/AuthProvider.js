@@ -8,9 +8,6 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isAuthLoading, setIsAtuthLoading] = useState(true);
 
-  // <parent><children/></parent>
-  //  <parent children=/>
-
   useEffect(() => {
     AsyncStorage.getItem("@USER").then((userSession) => {
       userSession && //kullanıcı varsa
@@ -20,6 +17,5 @@ export default function AuthProvider({ children }) {
   }, []);
 
   const store = createStore(Reducers, { user, isAuthLoading });
-
   return <Provider store={store}>{children}</Provider>;
 }

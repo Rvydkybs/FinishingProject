@@ -13,7 +13,7 @@ export default StyleSheet.create({
   },
   title: {
     padding: 3,
-    fontSize: 18,
+    fontSize: 20,
     color: "white",
   },
 });

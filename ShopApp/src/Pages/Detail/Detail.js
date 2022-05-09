@@ -7,8 +7,10 @@ import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import { Alert } from "react-native";
 
+import Message from "../Message";
+
 export default function Detail({ route }) {
-  const [text, setText] = useState("");
+  const [message, setMessage] = useState("");
   const [value, setValue] = useState("");
 
   const { id } = route.params;
@@ -16,8 +18,9 @@ export default function Detail({ route }) {
     "https://fakestoreapi.com/products/" + "/" + id
   );
   const handleSend = () => {
-    console.log("detail page-send message to seller part:", text);
-    setText("");
+    <Message message={message} />;
+    console.log("detail page-send message to seller part:", message);
+    setMessage("");
     Alert.alert("Success", "Your message is send to the seller!");
   };
   if (loading) {
@@ -37,10 +40,10 @@ export default function Detail({ route }) {
       </View>
       <View style={styles.input}>
         <TextInput
-          value={text}
+          value={message}
           placeholder="Send a message to the seller..."
           onChangeText={(str) => {
-            setText(str);
+            setMessage(str);
           }}
         />
       </View>

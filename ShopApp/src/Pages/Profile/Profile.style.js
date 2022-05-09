@@ -43,4 +43,13 @@ export default StyleSheet.create({
     fontWeight: "700",
     color: "#00695C",
   },
+  message: {
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#e4e7ed",
+    fontSize: 20,
+    margin: 10,
+    padding: 10,
+    alignItems: "center",
+  },
 });

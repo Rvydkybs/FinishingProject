@@ -46,6 +46,17 @@ export default StyleSheet.create({
   buttonOutText: {
     color: "blue",
     fontWeight: "700",
-    fontSize: 16,
+    fontSize: 20,
+  },
+  register: {
+    borderRadius: 10,
+    backgroundColor: "#00695C",
+  },
+  registerText: {
+    fontSize: 20,
+    color: "white",
+  },
+  registercontain: {
+    alignItems: "center",
   },
 });

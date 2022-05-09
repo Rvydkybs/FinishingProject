@@ -1,16 +1,32 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
 import { useDispatch } from "react-redux";
-import { TouchableOpacity } from "react-native-gesture-handler";
+// import { createDrawerNavigator } from "@react-navigation/drawer";
+// import "react-native-gesture-handler";
 
 import styles from "./Profile.style";
 import LogOut from "../../Components/LogOut/LogOut";
+// import { NavigationContainer } from "@react-navigation/native";
+// import Location from "../../Pages/Location";
+
+//const Drawer = createDrawerNavigator();
 
 export default function Profile({ navigation }) {
   const [data, setData] = useState({});
   const [lootie, setLootie] = useState(false);
   const dispatch = useDispatch();
+  const handleMessageCheck = () => {
+    navigation.navigate("Message");
+  };
+
+  // const drawer = () => {
+  //   return (
+  //     <Drawer.Navigator>
+  //       <Drawer.Screen name="Location" component={Location}></Drawer.Screen>
+  //     </Drawer.Navigator>
+  //   );
+  // };
   const fetchData = async () => {
     try {
       const { data: responseData } = await axios.get(
@@ -26,8 +42,15 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     fetchData();
   }, []);
-  //console.log("user: ", data);
+
   return (
+    // <>
+    //   <NavigationContainer>
+    //     <Drawer.Navigator>
+    //       <Drawer.Screen name="Location" component={Location}></Drawer.Screen>
+    //     </Drawer.Navigator>
+    //   </NavigationContainer>
+
     <View style={styles.outcontainer}>
       <View style={styles.container}>
         <Text style={{ fontSize: 24 }}>Your Profile</Text>
@@ -46,16 +69,14 @@ export default function Profile({ navigation }) {
           </View>
         </View>
       </View>
-      <View style={styles.button}>
-        <TouchableOpacity
-          onPress={() => {
-            dispatch({ type: "SET_USER", payload: { user: null } });
-          }}
-        >
-          <Text style={styles.tco}>Log Out</Text>
+
+      <View style={styles.message}>
+        <TouchableOpacity onPress={handleMessageCheck}>
+          <Text>Get your messages</Text>
         </TouchableOpacity>
       </View>
     </View>
+    //</>
   );
 }
 

@@ -4,10 +4,20 @@ import TextBox from "../../Components/TextBox";
 import firebase from "firebase/app";
 import "firebase/auth";
 import Btn from "../../Components/Btn";
-export default function LoginScreen() {
+const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
+
+export default function SignUpScreen({ navigation }) {
   const [values, setValues] = useState({
     email: "",
     pwd: "",
+    pwd2: "",
   });
 
   function handleChange(text, eventName) {
@@ -19,23 +29,27 @@ export default function LoginScreen() {
     });
   }
 
-  function Login() {
-    const { email, pwd } = values;
+  function SignUp() {
+    const { email, pwd, pwd2 } = values;
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, pwd)
-      .then(() => {})
-      .catch((error) => {
-        alert(error.message);
-        // ..
-      });
+    if (pwd == pwd2) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, pwd)
+        .then(() => {})
+        .catch((error) => {
+          alert(error.message);
+          // ..
+        });
+    } else {
+      alert("Passwords are different!");
+    }
   }
 
   return (
     <View style={styles.view}>
       <Text style={{ fontSize: 34, fontWeight: "800", marginBottom: 20 }}>
-        Login
+        Sign Up
       </Text>
       <TextBox
         placeholder="Email Address"
@@ -43,8 +57,13 @@ export default function LoginScreen() {
       />
       <TextBox
         placeholder="Password"
-        onChangeText={(text) => handleChange(text, "pwd")}
         secureTextEntry={true}
+        onChangeText={(text) => handleChange(text, "pwd")}
+      />
+      <TextBox
+        placeholder="Confirme Password"
+        secureTextEntry={true}
+        onChangeText={(text) => handleChange(text, "pwd2")}
       />
       <View
         style={{
@@ -54,10 +73,14 @@ export default function LoginScreen() {
           width: "92%",
         }}
       >
-        <Btn onClick={() => Login()} title="Login" style={{ width: "48%" }} />
         <Btn
-          onClick={() => navigation.navigate("Sign Up")}
+          onClick={() => SignUp()}
           title="Sign Up"
+          style={{ width: "48%" }}
+        />
+        <Btn
+          onClick={() => navigation.replace("Login")}
+          title="Login"
           style={{ width: "48%", backgroundColor: "#344869" }}
         />
       </View>

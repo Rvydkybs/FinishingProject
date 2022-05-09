@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Image } from "react-native";
+import { View, Image, TouchableOpacity, Text } from "react-native";
 import styles from "./Login.style";
 import { Formik } from "formik";
 import { Alert } from "react-native";
@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import Error from "../../Components/Error/Error";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
+import Register from "../../Components/Register/Register";
 
 export default function Login({ navigation }) {
   const { data, loading, post, error } = usePost(); //hooks
@@ -17,8 +18,7 @@ export default function Login({ navigation }) {
     post("https://fakestoreapi.com/auth" + "/login", values);
   }
   if (error) {
-    Alert.alert("Uups!", "Something went wrong");
-    return <Error />; //gelmiyo?
+    return <Error />;
   }
   if (data) {
     if (data.status === "Error") {
@@ -28,7 +28,9 @@ export default function Login({ navigation }) {
       navigation.navigate("TopBar", { screen: "ProductsPage" });
     }
   }
-
+  const handleRegister = () => {
+    return navigation.navigate("Register");
+  };
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
@@ -62,6 +64,11 @@ export default function Login({ navigation }) {
           </View>
         )}
       </Formik>
+      <View style={styles.registercontain}>
+        <TouchableOpacity onPress={handleRegister} style={styles.register}>
+          <Text style={styles.registerText}>Register</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

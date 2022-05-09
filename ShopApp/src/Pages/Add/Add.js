@@ -13,7 +13,7 @@ import { EvilIcons } from "@expo/vector-icons";
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import styles from "./Add.style";
-
+import products from "../../../products.json";
 export default function Add({ navigation }) {
   const [title, setTitle] = useState("");
   const [price, SetPrice] = useState("");
@@ -21,9 +21,16 @@ export default function Add({ navigation }) {
   const [imagePicker, setImagePicker] = useState(null);
 
   const handleAdd = () => {
+    // var obj = JSON.parse(json);
+    // const newList = {
+    //   title,
+    //   price,
+    //   desc,
+    // };
     if (title || desc || price === "") {
       Alert.alert("Warning", "Please fill in the blanks!");
     } else {
+      //var new_json = JSON.stringify(obj.Push(newList));
       fetch("https://fakestoreapi.com/products", {
         method: "POST",
         body: JSON.stringify({
@@ -36,7 +43,12 @@ export default function Add({ navigation }) {
       })
         .then((res) => res.json())
         .then((json) => console.log(json));
-      navigation.navigate("ProductsPage");
+      // .then(() => {
+      //   setTitle(null);
+      //   SetDesc(null);
+      //   SetPrice(null);
+      // });
+      navigation.navigate("TempPage");
     }
   };
   const handleChoose = async () => {
@@ -50,14 +62,6 @@ export default function Add({ navigation }) {
     if (!result.cancelled) {
       setImagePicker(result.uri);
     }
-    // const options = {
-    //   noData: true,
-    // };
-    // ImagePickerResponse.launchImageLibrary(options, (response) => {
-    //   if (response.uri) {
-    //     setImagePicker({ response });
-    //   }
-    // });
   };
 
   return (

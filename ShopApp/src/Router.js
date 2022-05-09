@@ -1,29 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useSelector } from "react-redux";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-// import { createDrawerNavigator } from "@react-navigation/drawer";
-// import 'react-native-gesture-handler';
+import { useDispatch } from "react-redux";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
-import Products from "./Pages/Products/Products";
 import Login from "./Pages/Login/Login";
 import Loading from "./Components/Loading/Loading";
 import Profile from "./Pages/Profile/Profile";
 import Add from "./Pages/Add/Add";
 import Detail from "./Pages/Detail/Detail";
 import TempPage from "./Pages/TempPage/TempPage";
+import Message from "./Pages/Message";
+import Register from "./Components/Register/Register";
+import Loginscreen from "./Pages/Login/LoginScreen";
+import SignUpScreen from "./Pages/Login/SignUp";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-// const Drawer = createDrawerNavigator();
 
 export default function Router() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const userSession = useSelector((s) => s.user);
   const isLoading = useSelector((s) => s.isAuthLoading);
+  const dispatch = useDispatch();
 
+  const firebaseConfig = {
+    //firebase
+    apiKey: "AIzaSyDC2D7nYV_aP1JmWK5oRl-XBKExTMjeqQY",
+    authDomain: "shopapppatika.firebaseapp.com",
+    projectId: "shopapppatika",
+    storageBucket: "shopapppatika.appspot.com",
+    messagingSenderId: "976991780324",
+    appId: "1:976991780324:web:717669023737f43e655bf1",
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  //Checking if firebase has been initialized
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  } else {
+    firebase.app();
+  }
+  firebase.onAuthStateChanged(auth, (user) => {
+    if (user != null) {
+      console.log("We are authenticated now!");
+    }
+
+    // Do other things
+  });
   const TopBar = () => {
     return (
       <Tab.Navigator
@@ -58,7 +88,7 @@ export default function Router() {
                 name="plus-circle"
                 color={"black"}
                 size={24}
-              /> // görünmüyo
+              />
             ),
           }}
         ></Tab.Screen>
@@ -66,7 +96,17 @@ export default function Router() {
           name="Profile"
           component={Profile}
           options={{
-            headerShown: null,
+            headerRight: () => (
+              <MaterialCommunityIcons
+                name="logout"
+                size={24}
+                color={"wihte"}
+                onPress={() => {
+                  dispatch({ type: "SET_USER", payload: { user: null } });
+                }}
+              />
+            ),
+            headerStyle: { backgroundColor: "#00695C" },
             tabBarActiveTintColor: "#00695C",
             tabBarIcon: () => (
               <MaterialCommunityIcons name="account" size={24} color="black" />
@@ -76,22 +116,27 @@ export default function Router() {
       </Tab.Navigator>
     );
   };
-  // const drawer = () => {
-  //   return <Drawer.Screen name="messages" component={TempPage}></Drawer.Screen>;
-  // };
+
   return (
     <NavigationContainer independent={true}>
       {isLoading ? (
         <Loading />
-      ) : !userSession ? (
+      ) : !isLoggedIn ? (
         <Stack.Navigator>
           <Stack.Screen
             name="LoginPage"
-            component={Login}
+            component={Loginscreen}
             options={{
               headerShown: false,
             }}
           ></Stack.Screen>
+          <Stack.Screen
+            name="Register"
+            component={SignUpScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
         </Stack.Navigator>
       ) : (
         <Stack.Navigator>
@@ -109,13 +154,13 @@ export default function Router() {
               headerShown: false,
             }}
           ></Stack.Screen>
-          {/* <Stack.Screen
-            name="drawer"
-            component={drawer}
+          <Stack.Screen
+            name="Message"
+            component={Message}
             options={{
               headerShown: false,
             }}
-          /> */}
+          />
         </Stack.Navigator>
       )}
     </NavigationContainer>
