@@ -25,7 +25,6 @@ export default function Login({ navigation }) {
       Alert.alert("Uups!", "User not found");
     } else {
       dispatch({ type: "SET_USER", payload: { user } });
-      navigation.navigate("TopBar", { screen: "ProductsPage" });
     }
   }
   const handleRegister = () => {

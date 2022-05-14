@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import {
   Text,
   View,
@@ -66,53 +67,55 @@ export default function Add({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 25 }}>Add a Product!</Text>
-      <View style={styles.image}>
-        <TouchableOpacity onPress={handleChoose}>
-          {!imagePicker ? (
-            <EvilIcons name="image" size={100} color="black" />
-          ) : (
-            <Image
-              source={{ uri: imagePicker }}
-              style={{ width: 140, height: 140, resizeMode: "contain" }}
-            />
-          )}
-        </TouchableOpacity>
-      </View>
-      <View style={styles.title}>
-        <TextInput
-          placeholder="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        ></TextInput>
-        <MaterialIcons name="title" size={20} color="#000" />
-      </View>
-      <View style={styles.price}>
-        <TextInput
-          placeholder="Price"
-          onChange={(e) => SetPrice(e.target.value)}
-        />
-        <Ionicons name="ios-pricetags" size={20} color="#000" />
-      </View>
-      <View style={styles.category}>
-        <TextInput placeholder="Category" />
-        <MaterialIcons name="category" size={20} color="#000" />
-      </View>
-      <View style={styles.desc}>
-        <TextInput
-          placeholder="Description"
-          onChange={(e) => SetDesc(e.target.value)}
-        />
-        <MaterialIcons name="description" size={20} color="#000" />
-      </View>
-      <View>
-        <Button
-          color="#00695C"
-          onPress={handleAdd}
-          title="Add Product"
-          style={styles.button}
-        />
-      </View>
+      <KeyboardAwareScrollView>
+        <Text style={{ fontSize: 25 }}>Add a Product!</Text>
+        <View style={styles.image}>
+          <TouchableOpacity onPress={handleChoose}>
+            {!imagePicker ? (
+              <EvilIcons name="image" size={100} color="black" />
+            ) : (
+              <Image
+                source={{ uri: imagePicker }}
+                style={{ width: 140, height: 140, resizeMode: "contain" }}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+        <View style={styles.title}>
+          <TextInput
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          ></TextInput>
+          <MaterialIcons name="title" size={20} color="#000" />
+        </View>
+        <View style={styles.price}>
+          <TextInput
+            placeholder="Price"
+            onChange={(e) => SetPrice(e.target.value)}
+          />
+          <Ionicons name="ios-pricetags" size={20} color="#000" />
+        </View>
+        <View style={styles.category}>
+          <TextInput placeholder="Category" />
+          <MaterialIcons name="category" size={20} color="#000" />
+        </View>
+        <View style={styles.desc}>
+          <TextInput
+            placeholder="Description"
+            onChange={(e) => SetDesc(e.target.value)}
+          />
+          <MaterialIcons name="description" size={20} color="#000" />
+        </View>
+        <View>
+          <Button
+            color="#00695C"
+            onPress={handleAdd}
+            title="Add Product"
+            style={styles.button}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 }
