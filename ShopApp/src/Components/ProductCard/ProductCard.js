@@ -1,5 +1,11 @@
-import React from "react";
-import { View, Text, Image, TouchableWithoutFeedback } from "react-native";
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableWithoutFeedback,
+  Button,
+} from "react-native";
 import styles from "./ProductCard.style";
 
 export default function ProductCard({ product, onSelect }) {

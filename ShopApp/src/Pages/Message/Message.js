@@ -6,7 +6,11 @@ export default function Message(props) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your Messages</Text>
-      {props ? <Text>props</Text> : <Text>There is no message for you </Text>}
+      {props.message ? ( //?????????????????????????????????????
+        <Text>{props.message}</Text>
+      ) : (
+        <Text>There is no message for you </Text>
+      )}
     </View>
   );
 }

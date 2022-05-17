@@ -15,6 +15,7 @@ import Detail from "./Pages/Detail/Detail";
 import TempPage from "./Pages/TempPage/TempPage";
 import Message from "./Pages/Message/Message";
 import Register from "./Components/Register/Register";
+import Products from "./Pages/Products/Products";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,7 +40,7 @@ export default function Router() {
       >
         <Tab.Screen
           name="TempPage"
-          component={TempPage}
+          component={Products}
           options={{
             title: "Home",
             tabBarActiveTintColor: "#00695C",

@@ -19,7 +19,7 @@ export default StyleSheet.create({
   body_container: {
     flex: 1,
     padding: 5,
-    justifyContent: "space-between", //resmi aşağı lkaydırmak için
+    justifyContent: "space-between", //resmi aşağı kaydırmak için
   },
   title: {
     fontWeight: "bold",
