@@ -12,17 +12,23 @@ import Button from "../../Components/Button/Button";
 import Register from "../../Components/Register/Register";
 
 export default function Login({ navigation }) {
-  const { data, loading, post, error } = usePost(); //hooks
+  const { data, loading, post, error, setLoading } = usePost(); //hooks
   const dispatch = useDispatch();
   function handleLogin(values) {
+    if (values === "") {
+      values = null;
+      setLoading(false);
+    }
+
     post("https://fakestoreapi.com/auth" + "/login", values);
   }
   if (error) {
-    return <Error />;
+    Alert.alert("warning", "please check your user name and password!");
   }
   if (data) {
-    if (data.status === "Error") {
+    if (data.status === "Error" || data.status === "") {
       Alert.alert("Uups!", "User not found");
+      user = null;
     } else {
       dispatch({ type: "SET_USER", payload: { user } });
     }

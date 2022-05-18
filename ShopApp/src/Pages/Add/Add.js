@@ -44,11 +44,7 @@ export default function Add({ navigation }) {
       })
         .then((res) => res.json())
         .then((json) => console.log(json));
-      // .then(() => {
-      //   setTitle(null);
-      //   SetDesc(null);
-      //   SetPrice(null);
-      // });
+
       navigation.navigate("TempPage");
     }
   };

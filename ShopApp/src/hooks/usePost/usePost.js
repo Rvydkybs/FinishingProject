@@ -13,8 +13,9 @@ export default function usePost() {
       setData(responseData);
       setLoading(false);
     } catch (error) {
+      setLoading(false);
       setError(true);
     }
   };
-  return { data, loading, error, post };
+  return { data, loading, error, post, setLoading };
 }

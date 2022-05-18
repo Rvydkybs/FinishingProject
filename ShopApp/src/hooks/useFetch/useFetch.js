@@ -20,5 +20,5 @@ export default function useFetch(url) {
   useEffect(() => {
     fetchData();
   }, []);
-  return { error, loading, data };
+  return { error, loading, data, setData };
 }

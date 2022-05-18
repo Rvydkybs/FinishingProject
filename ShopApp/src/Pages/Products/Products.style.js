@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   scrollView: {
     margin: 5,
-    padding: 5,
+    padding: 3,
     marginTop: 10,
     color: "black",
   },

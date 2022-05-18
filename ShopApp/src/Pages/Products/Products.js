@@ -7,14 +7,16 @@ import { useDispatch } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ScrollView } from "react-native-gesture-handler";
 import styles from "./Products.style";
-import { color } from "react-native-reanimated";
+import axios from "axios";
+import { useState } from "react";
 
 const Stack = createStackNavigator();
 
 export default function Products({ navigation }) {
+  const [categoryData, setCategoryData] = useState([]);
   const dispatch = useDispatch();
 
-  const { loading, data, error } = useFetch(
+  const { loading, data, error, setData } = useFetch(
     //artık verileri custom hook ile çağırıyoruz
     "https://fakestoreapi.com/products/"
   );
@@ -28,7 +30,19 @@ export default function Products({ navigation }) {
       onSelect={() => handleProductSelect(item.id)}
     ></ProductCard>
   );
-  const handlePress = () => {};
+
+  const handlePress = async (e) => {
+    // const id = e.target.id;
+    // console.log(id);
+    // if (id == "men") {
+    const { data: responseData } = await axios.get(
+      "https://fakestoreapi.com/products/category/men's clothing"
+    );
+    console.log(responseData);
+    setData(responseData);
+    // data = responseData;
+    //}
+  };
   return (
     <View>
       {loading ? (
@@ -45,17 +59,25 @@ export default function Products({ navigation }) {
               //style={styles.scroll}
             >
               <Button
+                id="men"
                 onPress={handlePress}
                 title="men's clothing"
                 color="#00695C"
               />
-              <Button onPress={handlePress} title="jewelery" color="#00695C" />
               <Button
+                id="jewelery"
+                onPress={handlePress}
+                title="jewelery"
+                color="#00695C"
+              />
+              <Button
+                id="electronics"
                 onPress={handlePress}
                 title="electronics"
                 color="#00695C"
               />
               <Button
+                id="women"
                 onPress={handlePress}
                 title="women's clothing"
                 color="#00695C"
@@ -69,7 +91,6 @@ export default function Products({ navigation }) {
           ></FlatList>
         </View>
       )}
-      {/* <FlatList data={data} renderItem={renderProduct}></FlatList> */}
     </View>
   );
 }
