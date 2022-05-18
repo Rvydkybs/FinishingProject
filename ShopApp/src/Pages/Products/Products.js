@@ -1,29 +1,31 @@
 import { View, FlatList, Button, Text } from "react-native";
-import Loading from "../../Components/Loading/Loading";
-import Error from "../../Components/Error/Error";
-import ProductCard from "../../Components/ProductCard/ProductCard";
 import useFetch from "../../hooks/useFetch/useFetch";
-import { useDispatch } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 import { ScrollView } from "react-native-gesture-handler";
-import styles from "./Products.style";
 import axios from "axios";
-import { useState } from "react";
+import ProductCard from "../../Components/ProductCard/ProductCard";
+import Loading from "../../Components/Loading/Loading";
+import Error from "../../Components/Error/Error";
+import styles from "./Products.style";
+//import useCategory from "../../hooks/usecategory/useCategory";
 
 const Stack = createStackNavigator();
 
 export default function Products({ navigation }) {
-  const [categoryData, setCategoryData] = useState([]);
-  const dispatch = useDispatch();
-
+  // const {
+  //   handlePressMen,
+  //   handlePressJew,
+  //   handlePressWomen,
+  //   handlePresselectronics,
+  // } = useCategory();
   const { loading, data, error, setData } = useFetch(
     //artık verileri custom hook ile çağırıyoruz
     "https://fakestoreapi.com/products/"
   );
+
   const handleProductSelect = (id) => {
     navigation.navigate("Detail", { id });
   };
-
   const renderProduct = ({ item }) => (
     <ProductCard
       product={item}
@@ -31,18 +33,6 @@ export default function Products({ navigation }) {
     ></ProductCard>
   );
 
-  const handlePress = async (e) => {
-    // const id = e.target.id;
-    // console.log(id);
-    // if (id == "men") {
-    const { data: responseData } = await axios.get(
-      "https://fakestoreapi.com/products/category/men's clothing"
-    );
-    console.log(responseData);
-    setData(responseData);
-    // data = responseData;
-    //}
-  };
   return (
     <View>
       {loading ? (
@@ -60,25 +50,46 @@ export default function Products({ navigation }) {
             >
               <Button
                 id="men"
-                onPress={handlePress}
+                onPress={async () => {
+                  const { data: responseData } = await axios.get(
+                    "https://fakestoreapi.com/products/category/men's clothing"
+                  );
+                  setData(responseData);
+                }}
                 title="men's clothing"
                 color="#00695C"
               />
               <Button
                 id="jewelery"
-                onPress={handlePress}
+                onPress={async () => {
+                  const { data: responseData } = await axios.get(
+                    "https://fakestoreapi.com/products/category/jewelery"
+                  );
+
+                  setData(responseData);
+                }}
                 title="jewelery"
                 color="#00695C"
               />
               <Button
                 id="electronics"
-                onPress={handlePress}
+                onPress={async () => {
+                  const { data: responseData } = await axios.get(
+                    "https://fakestoreapi.com/products/category/electronics"
+                  );
+                  setData(responseData);
+                }}
                 title="electronics"
                 color="#00695C"
               />
               <Button
                 id="women"
-                onPress={handlePress}
+                onPress={async () => {
+                  const { data: responseData } = await axios.get(
+                    "https://fakestoreapi.com/products/category/women's clothing"
+                  );
+                  setData(responseData);
+                }}
                 title="women's clothing"
                 color="#00695C"
               />

@@ -12,7 +12,6 @@ import Loading from "./Components/Loading/Loading";
 import Profile from "./Pages/Profile/Profile";
 import Add from "./Pages/Add/Add";
 import Detail from "./Pages/Detail/Detail";
-import TempPage from "./Pages/TempPage/TempPage";
 import Message from "./Pages/Message/Message";
 import Register from "./Components/Register/Register";
 import Products from "./Pages/Products/Products";
@@ -41,13 +40,13 @@ export default function Router() {
         <Tab.Screen
           name="TempPage"
           component={Products}
-          options={{
+          options={() => ({
             title: "Home",
             tabBarActiveTintColor: "#00695C",
             headerStyle: { backgroundColor: "#00695C" },
             headerTitleStyle: { color: "white" },
             tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
-          }}
+          })}
         ></Tab.Screen>
         <Tab.Screen
           name="Add"

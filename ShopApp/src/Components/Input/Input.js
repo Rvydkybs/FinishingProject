@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, TextInput } from "react-native";
 import styles from "./Input.style";
 import Icons from "react-native-vector-icons/MaterialCommunityIcons";
