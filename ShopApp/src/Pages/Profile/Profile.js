@@ -69,7 +69,15 @@ export default function Profile({ navigation }) {
           </View>
         </View>
       </View>
-
+      <View style={styles.message}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Basket");
+          }}
+        >
+          <Text>Go to Basket</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.message}>
         <TouchableOpacity onPress={handleMessageCheck}>
           <Text>Get your messages</Text>

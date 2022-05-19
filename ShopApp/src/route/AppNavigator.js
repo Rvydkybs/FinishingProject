@@ -8,6 +8,7 @@ import Products from "../Pages/Products/Products";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useDispatch } from "react-redux";
 import ProductsStack from "./ProductsStack";
+import ProfileStack from "./ProfileStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -53,7 +54,7 @@ const AppNavigator = () => {
       ></Tab.Screen>
       <Tab.Screen
         name="Profile"
-        component={Profile}
+        component={ProfileStack}
         options={{
           headerRight: () => (
             <MaterialCommunityIcons

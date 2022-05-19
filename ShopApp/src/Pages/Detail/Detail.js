@@ -8,6 +8,8 @@ import Error from "../../Components/Error/Error";
 import { Alert } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import Message from "../Message/Message";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Storage } from "../../utils/Storage";
 
 export default function Detail({ route }) {
   const [message, setMessage] = useState("");
@@ -32,6 +34,11 @@ export default function Detail({ route }) {
     return <Error />;
   }
 
+  const handleBasket = async (item) => {
+    const basket = await Storage.GetItem("basket");
+    Storage.SetItem("basket", basket ? [...basket, item] : [item]);
+  };
+
   return (
     <KeyboardAwareScrollView>
       <View style={styles.container}>
@@ -39,7 +46,15 @@ export default function Detail({ route }) {
         <View style={styles.bodyContainer}>
           <Text style={styles.title}>{data.title}</Text>
           <Text style={styles.descpn}>{data.description}</Text>
-          <Text style={styles.price}>{data.price} TL</Text>
+          <View style={styles.priceAndBasketContainer}>
+            <TouchableOpacity
+              style={styles.basketButton}
+              onPress={() => handleBasket(data)}
+            >
+              <Text style={styles.price}>{data.price} TL</Text>
+              <MaterialCommunityIcons name="basket" color={"black"} size={24} />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.input}>
           <TextInput

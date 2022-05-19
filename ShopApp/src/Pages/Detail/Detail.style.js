@@ -27,6 +27,7 @@ export default StyleSheet.create({
     fontWeight: "bold",
     fontSize: 22,
     textAlign: "right",
+    marginRight: 8,
   },
   button: {
     borderRadius: 10,
@@ -51,5 +52,18 @@ export default StyleSheet.create({
   opcityText: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  basketButton: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  priceAndBasketContainer: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
 });
