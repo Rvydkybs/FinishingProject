@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Image, TouchableOpacity, Text } from "react-native";
 import styles from "./Login.style";
 import { Formik } from "formik";
@@ -10,6 +10,7 @@ import Error from "../../Components/Error/Error";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
 import Register from "../../Components/Register/Register";
+import { Storage } from "../../utils/Storage";
 
 export default function Login({ navigation }) {
   const { data, loading, post, error } = usePost(); //hooks
@@ -25,12 +26,15 @@ export default function Login({ navigation }) {
       Alert.alert("Uups!", "User not found");
       user = null;
     } else {
-      dispatch({ type: "SET_USER", payload: { user } });
+      dispatch({ type: "SET_USER", payload: { user: user } });
+      Storage.SetItem("user", user);
     }
   }
   const handleRegister = () => {
     return navigation.navigate("Register");
   };
+
+  useEffect(() => {}, []);
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>

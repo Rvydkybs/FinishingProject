@@ -25,7 +25,6 @@ export default function useCategory() {
     const { data: responseData } = await axios.get(
       "https://fakestoreapi.com/products/category/jewelery"
     );
-    console.log(responseData);
     setData(responseData);
     //}
   };

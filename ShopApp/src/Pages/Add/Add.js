@@ -55,7 +55,6 @@ export default function Add({ navigation }) {
       aspect: [4, 3],
       quality: 1,
     });
-    console.log(result);
     if (!result.cancelled) {
       setImagePicker(result.uri);
     }

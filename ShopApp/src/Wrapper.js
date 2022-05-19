@@ -1,11 +1,14 @@
 import Router from "./Router";
-import AuthProvider from "./Context/AuthProvider/AuthProvider";
 import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import Reducers from "./Context/AuthProvider/Reducers";
 
 export default () => {
+  const store = createStore(Reducers);
   return (
-    <AuthProvider>
+    <Provider store={store}>
       <Router />
-    </AuthProvider>
+    </Provider>
   );
 };
