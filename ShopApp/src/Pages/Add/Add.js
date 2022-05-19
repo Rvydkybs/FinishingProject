@@ -57,9 +57,13 @@ export default function Add({ navigation }) {
       method: "GET",
     }).then(async (response) => {
       const responseData = await response.json();
-      navigation.navigate("ProductsPage", {
-        isFromAddPage: true,
-        data: [...responseData, data].sort((a, b) => b.id - a.id),
+      navigation.navigate("ProductsStack", {
+        screen: "ProductsPage",
+        initial: false,
+        params: {
+          isFromAddPage: true,
+          data: [...responseData, data].sort((a, b) => b.id - a.id),
+        },
       });
       setIsLoading(false);
       resetValues();

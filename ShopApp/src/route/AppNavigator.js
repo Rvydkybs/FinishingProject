@@ -1,37 +1,78 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-import Detail from "../Pages/Detail/Detail";
-import Message from "../Pages/Message/Message";
-import TopBar from "./TopBar";
+import Profile from "../Pages/Profile/Profile";
+import Add from "../Pages/Add/Add";
 
-const Stack = createStackNavigator();
+import Products from "../Pages/Products/Products";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useDispatch } from "react-redux";
+import ProductsStack from "./ProductsStack";
+
+const Tab = createBottomTabNavigator();
 
 const AppNavigator = () => {
+  const dispatch = useDispatch();
+
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="topBar"
-        component={TopBar}
+    <Tab.Navigator
+      screenOptions={{
+        activeTintColor: "#F8F8F8", // active icon color
+        inactiveTintColor: "#586589",
+        tabBarLabelStyle: {
+          fontWeight: "700",
+          fontSize: 20,
+        },
+      }}
+    >
+      <Tab.Screen
+        name="ProductsStack"
+        component={ProductsStack}
+        options={() => ({
+          title: "Home",
+          tabBarActiveTintColor: "#00695C",
+          headerStyle: { backgroundColor: "#00695C" },
+          headerTitleStyle: { color: "white" },
+          tabBarIcon: () => <Entypo name="home" size={24} color="black" />,
+        })}
+      ></Tab.Screen>
+      <Tab.Screen
+        name="Add"
+        component={Add}
         options={{
-          headerShown: false,
+          tabBarActiveTintColor: "#00695C",
+          headerShown: null,
+          tabBarIcon: () => (
+            <MaterialCommunityIcons
+              name="plus-circle"
+              color={"black"}
+              size={24}
+            />
+          ),
         }}
-      ></Stack.Screen>
-      <Stack.Screen
-        name="Detail"
-        component={Detail}
+      ></Tab.Screen>
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
         options={{
-          headerShown: false,
-        }}
-      ></Stack.Screen>
-      <Stack.Screen
-        name="Message"
-        component={Message}
-        options={{
-          headerShown: false,
+          headerRight: () => (
+            <MaterialCommunityIcons
+              name="logout"
+              size={24}
+              color={"white"}
+              onPress={() => {
+                dispatch({ type: "SET_USER", payload: { user: null } });
+              }}
+            />
+          ),
+          headerStyle: { backgroundColor: "#00695C" },
+          tabBarActiveTintColor: "#00695C",
+          tabBarIcon: () => (
+            <MaterialCommunityIcons name="account" size={24} color="black" />
+          ),
         }}
       />
-    </Stack.Navigator>
+    </Tab.Navigator>
   );
 };
-
 export default AppNavigator;
