@@ -59,5 +59,12 @@ export default StyleSheet.create({
   button: {
     margin: 5,
     borderRadius: 8,
+    backgroundColor: "#00695C",
+    padding: 8,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white",
   },
 });

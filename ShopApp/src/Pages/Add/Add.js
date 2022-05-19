@@ -7,6 +7,7 @@ import {
   Button,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,33 +22,56 @@ export default function Add({ navigation }) {
   const [desc, SetDesc] = useState("");
   const [imagePicker, setImagePicker] = useState(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleAdd = () => {
-    // var obj = JSON.parse(json);
-    // const newList = {
-    //   title,
-    //   price,
-    //   desc,
-    // };
-    if (title || desc || price === "") {
+    setIsLoading(true);
+    const sendData = {
+      title: title,
+      price: price,
+      description: desc,
+      image: imagePicker,
+      category: "electronic",
+    };
+    if (title == "" || desc == "" || price == "") {
       Alert.alert("Warning", "Please fill in the blanks!");
     } else {
       //var new_json = JSON.stringify(obj.Push(newList));
       fetch("https://fakestoreapi.com/products", {
         method: "POST",
-        body: JSON.stringify({
-          title: title,
-          price: price,
-          description: desc,
-          image: imagePicker,
-          category: "electronic",
-        }),
+        body: JSON.stringify(sendData),
       })
-        .then((res) => res.json())
-        .then((json) => console.log(json));
-
-      navigation.navigate("TempPage");
+        .then(async (res) => {
+          const data = await res.json();
+          getAllProducts({ ...data, ...sendData });
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          console.error(err);
+        });
     }
   };
+
+  const getAllProducts = (data) => {
+    fetch("https://fakestoreapi.com/products", {
+      method: "GET",
+    }).then(async (response) => {
+      const responseData = await response.json();
+      navigation.navigate("ProductsPage", {
+        isFromAddPage: true,
+        data: [...responseData, data].sort((a, b) => b.id - a.id),
+      });
+      setIsLoading(false);
+      resetValues();
+    });
+  };
+
+  const resetValues = () => {
+    setTitle("");
+    SetDesc("");
+    SetPrice("");
+  };
+
   const handleChoose = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -80,35 +104,35 @@ export default function Add({ navigation }) {
           <TextInput
             placeholder="Title"
             value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            onChangeText={setTitle}
           ></TextInput>
           <MaterialIcons name="title" size={20} color="#000" />
         </View>
         <View style={styles.price}>
           <TextInput
             placeholder="Price"
-            onChange={(e) => SetPrice(e.target.value)}
+            onChangeText={SetPrice}
+            value={price}
           />
           <Ionicons name="ios-pricetags" size={20} color="#000" />
         </View>
-        <View style={styles.category}>
+        {/* <View style={styles.category}>
           <TextInput placeholder="Category" />
           <MaterialIcons name="category" size={20} color="#000" />
-        </View>
+        </View> */}
         <View style={styles.desc}>
           <TextInput
             placeholder="Description"
-            onChange={(e) => SetDesc(e.target.value)}
+            onChangeText={SetDesc}
+            value={desc}
           />
           <MaterialIcons name="description" size={20} color="#000" />
         </View>
         <View>
-          <Button
-            color="#00695C"
-            onPress={handleAdd}
-            title="Add Product"
-            style={styles.button}
-          />
+          <TouchableOpacity style={styles.button} onPress={handleAdd}>
+            <Text style={{ color: "white", fontSize: 20 }}>Add product</Text>
+            {isLoading && <ActivityIndicator color={"white"} />}
+          </TouchableOpacity>
         </View>
       </KeyboardAwareScrollView>
     </View>

@@ -9,6 +9,7 @@ import Error from "../../Components/Error/Error";
 import styles from "./Products.style";
 import ActivityIndicator from "../../Components/Common/ActivityIndicator";
 import { useEffect, useState } from "react";
+import { useRoute } from "@react-navigation/native";
 //import useCategory from "../../hooks/usecategory/useCategory";
 
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ export default function Products({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [error, setError] = useState(false);
+  const route = useRoute();
 
   const handleProductSelect = (id) => {
     navigation.navigate("Detail", { id });
@@ -46,6 +48,12 @@ export default function Products({ navigation }) {
   useEffect(() => {
     getData("https://fakestoreapi.com/products");
   }, []);
+
+  useEffect(() => {
+    if (route.params?.isFromAddPage) {
+      setData(route.params.data);
+    }
+  }, [route.params]);
 
   return (
     <View>

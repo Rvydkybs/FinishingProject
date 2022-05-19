@@ -25,7 +25,7 @@ const TopBar = () => {
       }}
     >
       <Tab.Screen
-        name="TempPage"
+        name="ProductsPage"
         component={Products}
         options={() => ({
           title: "Home",
