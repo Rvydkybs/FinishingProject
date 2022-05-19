@@ -7,17 +7,14 @@ import ProductCard from "../../Components/ProductCard/ProductCard";
 import Loading from "../../Components/Loading/Loading";
 import Error from "../../Components/Error/Error";
 import styles from "./Products.style";
+import ActivityIndicator from "../../Components/Common/ActivityIndicator";
+import { useState } from "react";
 //import useCategory from "../../hooks/usecategory/useCategory";
 
 const Stack = createStackNavigator();
 
 export default function Products({ navigation }) {
-  // const {
-  //   handlePressMen,
-  //   handlePressJew,
-  //   handlePressWomen,
-  //   handlePresselectronics,
-  // } = useCategory();
+  const [isLoading, setIsLoading] = useState(true);
   const { loading, data, error, setData } = useFetch(
     //artık verileri custom hook ile çağırıyoruz
     "https://fakestoreapi.com/products/"
@@ -36,7 +33,7 @@ export default function Products({ navigation }) {
   return (
     <View>
       {loading ? (
-        <Loading />
+        <ActivityIndicator />
       ) : error ? (
         <Error />
       ) : (

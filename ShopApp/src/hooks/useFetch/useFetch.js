@@ -8,6 +8,7 @@ export default function useFetch(url) {
   const [error, setError] = useState(null);
 
   const fetchData = async () => {
+    setLoading(true);
     try {
       const { data: responseData } = await axios.get(url); //gelen response'dan datayı parçala ,productData adını ver
       setData(responseData);

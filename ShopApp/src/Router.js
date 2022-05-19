@@ -7,6 +7,7 @@ import Loading from "./Components/Loading/Loading";
 import AuthNavigator from "./route/AuthNavigator";
 import AppNavigator from "./route/AppNavigator";
 import { Storage } from "./utils/Storage";
+import ActivityIndicator from "./Components/Common/ActivityIndicator";
 
 export default function Router() {
   const userSession = useSelector((s) => s.user);
@@ -26,7 +27,7 @@ export default function Router() {
   return (
     <NavigationContainer independent={true}>
       {isLoading ? (
-        <Loading />
+        <ActivityIndicator />
       ) : !userSession ? (
         <AuthNavigator />
       ) : (
