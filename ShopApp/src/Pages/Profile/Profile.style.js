@@ -51,5 +51,20 @@ export default StyleSheet.create({
     margin: 10,
     padding: 10,
     alignItems: "center",
+    width: 150,
+  },
+  basket: {
+    borderWidth: 2,
+    borderRadius: 10,
+    backgroundColor: "#e4e7ed",
+    fontSize: 20,
+    margin: 10,
+    padding: 10,
+    alignItems: "center",
+    width: 150,
+  },
+  bottomBoxes: {
+    justifyContent: "space-evenly",
+    flexDirection: "row-reverse",
   },
 });

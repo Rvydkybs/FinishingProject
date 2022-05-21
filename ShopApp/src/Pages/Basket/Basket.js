@@ -32,7 +32,7 @@ export default Basket = () => {
           return <RenderProduct item={item} />;
         })
       )}
-      <Button text={"sil kanka"} onPress={() => removeAllBasket()} />
+      <Button text={"Delete all"} onPress={() => removeAllBasket()} />
     </View>
   );
 };

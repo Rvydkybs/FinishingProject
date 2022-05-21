@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import { View, Text, Image, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import useFetch from "../../hooks/useFetch/useFetch";
-import styles from "./Detail.style";
-import Loading from "../../Components/Loading/Loading";
-import Error from "../../Components/Error/Error";
 import { Alert } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import Message from "../Message/Message";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Storage } from "../../utils/Storage";
+import { useDispatch } from "react-redux";
+
+import useFetch from "../../hooks/useFetch/useFetch";
+import Error from "../../Components/Error/Error";
+import styles from "./Detail.style";
+import Loading from "../../Components/Loading/Loading";
 
 export default function Detail({ route }) {
   const [message, setMessage] = useState("");
 
+  const dispacth = useDispatch();
   const { id } = route.params;
+
   const { loading, error, data } = useFetch(
     "https://fakestoreapi.com/products/" + "/" + id
   );
@@ -23,7 +26,7 @@ export default function Detail({ route }) {
       return Alert.alert("Wrong", "Please enter a message!");
     } else {
       Alert.alert("Success", "Your message is send to the seller!");
-      <Message data={message} />;
+      // dispacth({ type: "SET_MESSAGE", payload: { message: message } });
       return setMessage("");
     }
   };
@@ -58,7 +61,6 @@ export default function Detail({ route }) {
         </View>
         <View style={styles.input}>
           <TextInput
-            value={message}
             placeholder="Send a message to the seller..."
             onChange={(str) => {
               setMessage(str.target.value);
