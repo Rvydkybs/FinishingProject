@@ -1,14 +1,11 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
-
-import Profile from "../Pages/Profile/Profile";
-import Add from "../Pages/Add/Add";
-
-import Products from "../Pages/Products/Products";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useDispatch } from "react-redux";
+
 import ProductsStack from "./ProductsStack";
 import ProfileStack from "./ProfileStack";
+import Add from "../Pages/Add/Add";
 
 const Tab = createBottomTabNavigator();
 

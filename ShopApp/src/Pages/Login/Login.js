@@ -5,16 +5,15 @@ import { Formik } from "formik";
 import { Alert } from "react-native";
 import usePost from "../../hooks/usePost/usePost";
 import { useDispatch } from "react-redux";
+import { Storage } from "../../utils/Storage";
 
-import Error from "../../Components/Error/Error";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
-import Register from "../../Components/Register/Register";
-import { Storage } from "../../utils/Storage";
 
 export default function Login({ navigation }) {
   const { data, loading, post, error } = usePost(); //hooks
   const dispatch = useDispatch();
+
   function handleLogin(values) {
     post("https://fakestoreapi.com/auth" + "/login", values);
   }
@@ -31,6 +30,7 @@ export default function Login({ navigation }) {
     }
   }
   const handleRegister = () => {
+    dispatch({ type: "SET_USER", payload: { user: null } });
     return navigation.navigate("Register");
   };
 
@@ -70,7 +70,7 @@ export default function Login({ navigation }) {
       </Formik>
       <View style={styles.registercontain}>
         <TouchableOpacity onPress={handleRegister} style={styles.register}>
-          <Text style={styles.registerText}>Register</Text>
+          <Text style={styles.registerText}>Guest Account</Text>
         </TouchableOpacity>
       </View>
     </View>

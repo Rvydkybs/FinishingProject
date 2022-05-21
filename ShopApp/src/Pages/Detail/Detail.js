@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Storage } from "../../utils/Storage";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import useFetch from "../../hooks/useFetch/useFetch";
 import Error from "../../Components/Error/Error";
@@ -15,6 +16,7 @@ import Loading from "../../Components/Loading/Loading";
 export default function Detail({ route }) {
   const [message, setMessage] = useState("");
 
+  const userSession = useSelector((s) => s.user);
   const dispacth = useDispatch();
   const { id } = route.params;
 
@@ -59,19 +61,23 @@ export default function Detail({ route }) {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.input}>
-          <TextInput
-            placeholder="Send a message to the seller..."
-            onChange={(str) => {
-              setMessage(str.target.value);
-            }}
-          />
-        </View>
-        <View>
-          <TouchableOpacity style={styles.opcity} onPress={handleSend}>
-            <Text style={styles.opcityText}>Send</Text>
-          </TouchableOpacity>
-        </View>
+        {userSession ? (
+          <View>
+            <View style={styles.input}>
+              <TextInput
+                placeholder="Send a message to the seller..."
+                onChange={(str) => {
+                  setMessage(str.target.value);
+                }}
+              />
+            </View>
+            <View>
+              <TouchableOpacity style={styles.opcity} onPress={handleSend}>
+                <Text style={styles.opcityText}>Send</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : null}
       </View>
     </KeyboardAwareScrollView>
   );

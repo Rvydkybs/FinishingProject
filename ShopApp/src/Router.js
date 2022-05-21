@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 
-import Loading from "./Components/Loading/Loading";
-
 import AuthNavigator from "./route/AuthNavigator";
 import AppNavigator from "./route/AppNavigator";
 import { Storage } from "./utils/Storage";
