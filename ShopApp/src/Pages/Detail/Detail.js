@@ -15,7 +15,7 @@ import Loading from "../../Components/Loading/Loading";
 
 export default function Detail({ route }) {
   const [message, setMessage] = useState("");
-
+  const [price, setPrice] = useState(null);
   const userSession = useSelector((s) => s.user);
   const dispacth = useDispatch();
   const { id } = route.params;
@@ -42,6 +42,10 @@ export default function Detail({ route }) {
   const handleBasket = async (item) => {
     const basket = await Storage.GetItem("basket");
     Storage.SetItem("basket", basket ? [...basket, item] : [item]);
+    Alert.alert("Congratulations", "It's added to your basket!");
+    // var resultPrice = setPrice(parseInt(price));
+    // console.log(resultPrice);
+    // Storage.SetItem("basketPrice", basket ? setPrice(resultPrice) : null);
   };
 
   return (

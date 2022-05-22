@@ -1,8 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { Text } from "react-native";
 import Basket from "../Pages/Basket/Basket";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Profile from "../Pages/Profile/Profile";
+import Message from "../Pages/Message/Message";
+import ProfileDawerNavigation from "./ProfileDawerNavigation";
 
 const Stack = createStackNavigator();
 
@@ -10,8 +12,8 @@ const ProfileStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Profile"
-        component={Profile}
+        name="ProfilePage"
+        component={ProfileDawerNavigation}
         options={{
           headerShown: false,
         }}

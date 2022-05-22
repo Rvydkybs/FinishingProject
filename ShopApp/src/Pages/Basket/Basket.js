@@ -1,19 +1,28 @@
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import React, { Component, useEffect, useState } from "react";
 import { Storage } from "../../utils/Storage";
 import { useIsFocused } from "@react-navigation/native";
+
 import { RenderProduct } from "../Products/Products";
 import Button from "../../Components/Button/Button";
+import Loading from "../../Components/Loading/Loading";
+import styles from "./Basket.style";
 
-export default Basket = () => {
+export default Basket = ({ navigation }) => {
   const isFocused = useIsFocused();
   const [basket, setBasket] = useState([]);
-
+  const [basketPrice, setBasketPrice] = useState("");
+  const [loading, setLoading] = useState(false);
   const getBasket = async () => {
     const basket = await Storage.GetItem("basket");
+    const basketPrice = await Storage.GetItem("basketPrice");
     setBasket(basket);
   };
-
+  const goToProdutcs = () => {
+    setLoading(true);
+    navigation.navigate("ProductsStack", { screen: "ProductsPage" });
+    loading ? <Loading /> : setLoading(false);
+  };
   const removeAllBasket = () => {
     Storage.RemoveItem("basket");
     setBasket([]);
@@ -26,13 +35,37 @@ export default Basket = () => {
   return (
     <View>
       {(basket && basket.length == 0) || !basket ? (
-        <Text>henüz eklemedin</Text>
+        <View style={styles.innerContainer}>
+          <Text style={styles.text}>You don't have any products.</Text>
+          <Text style={styles.text}>
+            Please click the bottom button to see the products.{" "}
+          </Text>
+          <Image
+            source={require("../../assets/images.png")}
+            style={styles.image}
+          />
+          {/* <Text style={{ fontSize: 18 }}>Your total amount: {basketPrice}</Text> */}
+        </View>
       ) : (
         basket.map((item) => {
           return <RenderProduct item={item} />;
         })
       )}
-      <Button text={"Delete all"} onPress={() => removeAllBasket()} />
+
+      <View>
+        {basket ? (
+          <View style={styles.container}>
+            {/* <Text style={{ fontSize: 18 }}>
+              Your total amount: {basketPrice}
+            </Text> */}
+            <Button text={"Delete all"} onPress={() => removeAllBasket()} />
+          </View>
+        ) : (
+          <View style={{ justifyContent: "flex-end", marginTop: 40 }}>
+            <Button text="Go to Products!" onPress={goToProdutcs} />
+          </View>
+        )}
+      </View>
     </View>
   );
 };
