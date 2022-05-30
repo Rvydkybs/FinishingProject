@@ -1,4 +1,5 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import CreateRegister from "../Pages/CreateRegister/CreateRegister";
 
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
@@ -15,6 +16,13 @@ const AuthNavigator = () => {
           headerShown: false,
         }}
       ></Stack.Screen>
+      <Stack.Screen
+        name="CreateRegister"
+        component={CreateRegister}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="Register"
         component={Register}

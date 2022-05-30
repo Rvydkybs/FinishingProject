@@ -69,6 +69,7 @@ export default function Detail({ route }) {
           <View>
             <View style={styles.input}>
               <TextInput
+                value={message}
                 placeholder="Send a message to the seller..."
                 onChange={(str) => {
                   setMessage(str.target.value);

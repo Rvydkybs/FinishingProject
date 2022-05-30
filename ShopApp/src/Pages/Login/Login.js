@@ -31,7 +31,7 @@ export default function Login({ navigation }) {
   }
   const handleRegister = () => {
     dispatch({ type: "SET_USER", payload: { user: null } });
-    return navigation.navigate("Register");
+    return navigation.navigate("CreateRegister");
   };
 
   useEffect(() => {}, []);
