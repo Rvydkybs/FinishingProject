@@ -20,8 +20,12 @@ export default function CreateRegister({ navigation }) {
     }
   };
   const handleValidate = () => {
-    if (check === false) {
-      Alert.alert("Warning!", "Email is Not Correct");
+    if (check === false || email === "") {
+      {
+        !check
+          ? Alert.alert("Warning!", "Email is Not Correct")
+          : Alert.alert("Warning!", "Please enter a email adress");
+      }
     } else navigation.navigate("Register");
   };
   return (

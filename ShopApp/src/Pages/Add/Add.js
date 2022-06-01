@@ -13,7 +13,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import styles from "./Add.style";
 
@@ -36,6 +36,7 @@ export default function Add({ navigation }) {
     };
     if (title == "" || desc == "" || price == "") {
       Alert.alert("Warning", "Please fill in the blanks!");
+      setIsLoading(false);
     } else {
       //var new_json = JSON.stringify(obj.Push(newList));
       fetch("https://fakestoreapi.com/products", {
@@ -45,6 +46,7 @@ export default function Add({ navigation }) {
         .then(async (res) => {
           const data = await res.json();
           getAllProducts({ ...data, ...sendData });
+          setImagePicker(null);
         })
         .catch((err) => {
           setIsLoading(false);
@@ -93,25 +95,22 @@ export default function Add({ navigation }) {
     <View style={styles.container}>
       <KeyboardAwareScrollView>
         <Text style={{ fontSize: 25 }}>Add a Product!</Text>
-        <View style={styles.image}>
+        <View style={styles.innerContainer}>
           <TouchableOpacity onPress={handleChoose}>
             {!imagePicker ? (
               <EvilIcons name="image" size={150} color="black" />
             ) : (
-              <View style={styles.innerContainer}>
-                <Image source={{ uri: imagePicker }} style={styles.image} />
-                <AntDesign
-                  name="delete"
-                  size={40}
-                  color="black"
-                  onPress={() => {
-                    //does not work
-                    setImagePicker(null);
-                    console.log("its null");
-                  }}
-                />
-              </View>
+              <Image source={{ uri: imagePicker }} style={styles.image} />
             )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={() => {
+              //does not work
+              setImagePicker(null);
+            }}
+          >
+            <MaterialCommunityIcons name="delete" size={40} color="black" />
           </TouchableOpacity>
         </View>
         <View style={styles.textParts}>

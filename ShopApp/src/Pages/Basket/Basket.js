@@ -44,20 +44,16 @@ export default Basket = ({ navigation }) => {
             source={require("../../assets/images.png")}
             style={styles.image}
           />
-          {/* <Text style={{ fontSize: 18 }}>Your total amount: {basketPrice}</Text> */}
         </View>
       ) : (
         basket.map((item) => {
-          return <RenderProduct item={item} />;
+          return <RenderProduct item={item} key={item.toString()} />;
         })
       )}
 
       <View>
         {basket ? (
           <View style={styles.container}>
-            {/* <Text style={{ fontSize: 18 }}>
-              Your total amount: {basketPrice}
-            </Text> */}
             <Button text={"Delete all"} onPress={() => removeAllBasket()} />
           </View>
         ) : (

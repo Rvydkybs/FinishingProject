@@ -120,6 +120,7 @@ export default function Products({ navigation }) {
             data={data}
             renderItem={({ item }) => <RenderProduct item={item} />}
             style={styles.list}
+            keyExtractor={(item) => item.id}
           ></FlatList>
         </View>
       )}

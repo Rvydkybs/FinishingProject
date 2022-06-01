@@ -7,7 +7,9 @@ export default StyleSheet.create({
     backgroundColor: "white",
   },
   innerContainer: {
+    marginTop: 30,
     flexDirection: "row",
+    justifyContent: "space-between",
   },
   image: {
     backgroundColor: "white",

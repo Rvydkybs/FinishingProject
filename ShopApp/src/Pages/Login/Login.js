@@ -18,7 +18,7 @@ export default function Login({ navigation }) {
     post("https://fakestoreapi.com/auth" + "/login", values);
   }
   if (error) {
-    Alert.alert("warning", "please check your user name and password!");
+    Alert.alert("Warning", "Please check your user name and password!");
   }
   if (data) {
     if (data.status === "Error") {
@@ -47,14 +47,14 @@ export default function Login({ navigation }) {
         {({ handleSubmit, handleChange, values }) => (
           <View style={styles.body}>
             <Input
-              placeholder="enter user name"
+              placeholder="Enter user name"
               value={values.username}
               onType={handleChange("username")}
               iconName="account"
             />
 
             <Input
-              placeholder="enter your password"
+              placeholder="Enter your password"
               value={values.password}
               onType={handleChange("password")}
               iconName="key"
