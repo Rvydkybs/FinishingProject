@@ -15,9 +15,7 @@ import Loading from "../../Components/Loading/Loading";
 
 export default function Detail({ route }) {
   const [message, setMessage] = useState("");
-  const [price, setPrice] = useState(null);
   const userSession = useSelector((s) => s.user);
-  const dispacth = useDispatch();
   const { id } = route.params;
 
   const { loading, error, data } = useFetch(
@@ -56,13 +54,21 @@ export default function Detail({ route }) {
           <Text style={styles.title}>{data.title}</Text>
           <Text style={styles.descpn}>{data.description}</Text>
           <View style={styles.priceAndBasketContainer}>
-            <TouchableOpacity
-              style={styles.basketButton}
-              onPress={() => handleBasket(data)}
-            >
+            {userSession ? (
+              <TouchableOpacity
+                style={styles.basketButton}
+                onPress={() => handleBasket(data)}
+              >
+                <Text style={styles.price}>{data.price} TL</Text>
+                <MaterialCommunityIcons
+                  name="basket"
+                  color={"black"}
+                  size={24}
+                />
+              </TouchableOpacity>
+            ) : (
               <Text style={styles.price}>{data.price} TL</Text>
-              <MaterialCommunityIcons name="basket" color={"black"} size={24} />
-            </TouchableOpacity>
+            )}
           </View>
         </View>
         {userSession ? (

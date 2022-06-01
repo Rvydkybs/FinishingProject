@@ -1,36 +1,28 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { Alert, Text, View } from "react-native";
+import React, { useState } from "react";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
-import styles from "./CreateRegister.style";
-export default function CreateRegister({ navigation }) {
-  const [text, setText] = useState("");
 
-  const handleRegister = () => {
-    // const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // return re.test(String(text).toLowerCase());
-    // if (
-    //   /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(
-    //     String(text).toLowerCase()
-    //   )
-    // ) {
-    //   navigation.navigate("Register");
-    //   setText("");
-    //   return true;
-    // }
-    // alert("You have entered an invalid email address!");
-    // setText("");
-    // return false;
+import styles from "./CreateRegister.style";
+
+export default function CreateRegister({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [check, setCheck] = useState(true);
+
+  const validate = (text) => {
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    if (reg.test(text) === false) {
+      setCheck(false);
+      setEmail(text);
+      return false;
+    } else {
+      setCheck(true);
+      setEmail(text);
+    }
   };
   const handleValidate = () => {
-    const reg =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const result = reg.test(String(text).toLowerCase());
-    if (result) {
-      navigation.navigate("Register");
-      setText("");
-    } else {
-      Alert.alert("Alert", "Email is wrong");
-    }
+    if (check === false) {
+      Alert.alert("Warning!", "Email is Not Correct");
+    } else navigation.navigate("Register");
   };
   return (
     <View style={styles.conatiner}>
@@ -41,8 +33,8 @@ export default function CreateRegister({ navigation }) {
         <TextInput
           style={styles.inputText}
           placeholder="  Enter your email adress..."
-          onChange={setText}
-          value={text}
+          onChangeText={(text) => validate(text)}
+          value={email}
         />
         <TouchableOpacity
           onPress={handleValidate}

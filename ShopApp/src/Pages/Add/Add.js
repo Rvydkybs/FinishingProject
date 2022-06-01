@@ -4,7 +4,6 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   TouchableOpacity,
   Image,
   ActivityIndicator,
@@ -14,8 +13,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { EvilIcons } from "@expo/vector-icons";
 import { Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { AntDesign } from "@expo/vector-icons";
+
 import styles from "./Add.style";
-import products from "../../../products.json";
+
 export default function Add({ navigation }) {
   const [title, setTitle] = useState("");
   const [price, SetPrice] = useState("");
@@ -95,48 +96,59 @@ export default function Add({ navigation }) {
         <View style={styles.image}>
           <TouchableOpacity onPress={handleChoose}>
             {!imagePicker ? (
-              <EvilIcons name="image" size={100} color="black" />
+              <EvilIcons name="image" size={150} color="black" />
             ) : (
-              <Image
-                source={{ uri: imagePicker }}
-                style={{ width: 140, height: 140, resizeMode: "contain" }}
-              />
+              <View style={styles.innerContainer}>
+                <Image source={{ uri: imagePicker }} style={styles.image} />
+                <AntDesign
+                  name="delete"
+                  size={40}
+                  color="black"
+                  onPress={() => {
+                    //does not work
+                    setImagePicker(null);
+                    console.log("its null");
+                  }}
+                />
+              </View>
             )}
           </TouchableOpacity>
         </View>
-        <View style={styles.title}>
-          <TextInput
-            placeholder="Title"
-            value={title}
-            onChangeText={setTitle}
-          ></TextInput>
-          <MaterialIcons name="title" size={20} color="#000" />
-        </View>
-        <View style={styles.price}>
-          <TextInput
-            placeholder="Price"
-            onChangeText={SetPrice}
-            value={price}
-          />
-          <Ionicons name="ios-pricetags" size={20} color="#000" />
-        </View>
-        {/* <View style={styles.category}>
+        <View style={styles.textParts}>
+          <View style={styles.title}>
+            <TextInput
+              placeholder="Title"
+              value={title}
+              onChangeText={setTitle}
+            ></TextInput>
+            <MaterialIcons name="title" size={20} color="#000" />
+          </View>
+          <View style={styles.price}>
+            <TextInput
+              placeholder="Price"
+              onChangeText={SetPrice}
+              value={price}
+            />
+            <Ionicons name="ios-pricetags" size={20} color="#000" />
+          </View>
+          {/* <View style={styles.category}>
           <TextInput placeholder="Category" />
           <MaterialIcons name="category" size={20} color="#000" />
         </View> */}
-        <View style={styles.desc}>
-          <TextInput
-            placeholder="Description"
-            onChangeText={SetDesc}
-            value={desc}
-          />
-          <MaterialIcons name="description" size={20} color="#000" />
-        </View>
-        <View>
-          <TouchableOpacity style={styles.button} onPress={handleAdd}>
-            <Text style={{ color: "white", fontSize: 20 }}>Add product</Text>
-            {isLoading && <ActivityIndicator color={"white"} />}
-          </TouchableOpacity>
+          <View style={styles.desc}>
+            <TextInput
+              placeholder="Description"
+              onChangeText={SetDesc}
+              value={desc}
+            />
+            <MaterialIcons name="description" size={20} color="#000" />
+          </View>
+          <View>
+            <TouchableOpacity style={styles.button} onPress={handleAdd}>
+              <Text style={{ color: "white", fontSize: 20 }}>Add product</Text>
+              {isLoading && <ActivityIndicator color={"white"} />}
+            </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAwareScrollView>
     </View>

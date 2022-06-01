@@ -6,15 +6,22 @@ export default StyleSheet.create({
     marginTop: 20,
     backgroundColor: "white",
   },
+  innerContainer: {
+    flexDirection: "row",
+  },
   image: {
     backgroundColor: "white",
     borderRadius: 8,
-    width: 170,
-    height: 140,
+    width: 200,
+    height: 200,
     padding: 10,
     margin: 10,
-    fontSize: 20,
     justifyContent: "center",
+    resizeMode: "contain",
+    marginRight: 80,
+  },
+  textParts: {
+    marginTop: 30,
   },
   title: {
     flexDirection: "row",

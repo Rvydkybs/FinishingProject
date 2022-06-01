@@ -58,21 +58,15 @@ export default function Profile({ navigation }) {
               navigation.navigate("Basket");
             }}
           >
-            <Text>Go to Basket</Text>
+            <Text style={styles.boxTexts}>Go to Basket</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.message}>
           <TouchableOpacity onPress={handleMessageCheck}>
-            <Text>Get your messages</Text>
+            <Text style={styles.boxTexts}>Get your messages</Text>
           </TouchableOpacity>
         </View>
       </View>
     </View>
   );
 }
-
-const style = StyleSheet.create({
-  button: {
-    flexDirection: "row-reverse",
-  },
-});

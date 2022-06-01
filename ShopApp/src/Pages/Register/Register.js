@@ -3,14 +3,18 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import Login from "../Login/Login";
+import { Ionicons } from "@expo/vector-icons";
+
 import ProductsStack from "../../route/ProductsStack";
-import CloseRegister from "./CloseRegister";
 
 const Tab = createBottomTabNavigator();
 
 export default function Register() {
   const navigation = useNavigation();
+  const Close = () => {
+    navigation.navigate("LoginPage");
+    return true;
+  };
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator
@@ -35,9 +39,14 @@ export default function Register() {
           }}
         ></Tab.Screen>
         <Tab.Screen
-          name="CloseRegister"
-          component={Login} //loginin açılması baika- logine yönlendirme başka
-          options={{ headerShown: false }}
+          name="Sign Out"
+          component={Close} //loginin açılması baika- logine yönlendirme başka
+          options={{
+            headerShown: false,
+            tabBarIcon: () => (
+              <Ionicons name="ios-exit" size={24} color="black" />
+            ),
+          }}
         />
       </Tab.Navigator>
     </NavigationContainer>
